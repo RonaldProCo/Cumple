@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feliz Cumpleaños Camila</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            background-color: #090e33;
+            color: #fff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .container {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            color: #7ce9ff;
+            text-shadow: 0 0 15px #2196f3, 0 0 30px #00bcd4;
+        }
+
+        .mensaje {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .hidden-message {
+            display: inline-block;
+            background-color: rgba(0, 150, 255, 0.2);
+            border-radius: 50px;
+            padding: 10px 20px;
+            margin: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid #1e88e5;
+            box-shadow: 0 0 10px #0d47a1;
+        }
+
+        .hidden-message:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px #1565c0;
+        }
+
+        .footer {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            font-size: 0.8rem;
+            opacity: 0.7;
+        }
+
+        .katakana {
+            font-family: 'MS Gothic', 'MS Mincho', sans-serif;
+            position: absolute;
+            color: #4fc3f7;
+            opacity: 0.3;
+            z-index: -1;
+            font-size: 1.5rem;
+            pointer-events: none;
+        }
+
+        .heart {
+            position: absolute;
+            pointer-events: none;
+            color: #ff7e7e;
+            font-size: 2rem;
+            animation: float 3s ease-in-out forwards;
+            opacity: 0;
+            z-index: 10;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0) scale(0.5);
+                opacity: 0;
+            }
+            20% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) scale(1.2);
+                opacity: 0;
+            }
+        }
+
+        #canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+
+    <div class="container">
+        <h1>¡Feliz Cumpleaños Camila!</h1>
+        
+        <div class="mensaje">
+            Feliz cumpleaños. En tu día especial, quería reconocer tu luz y desearte que sigas creciendo con todo lo bueno que mereces. Un abrazo sincero 🌟
+        </div>
+
+        <div id="hidden-messages">
+            <div class="hidden-message" onclick="showMessage(this, 'Sonríe, eres especial')">Haz click aquí</div>
+            <div class="hidden-message" onclick="showMessage(this, 'Eres arte en este mundo')">Descubre un secreto</div>
+            <div class="hidden-message" onclick="showMessage(this, 'Nunca dejes de sonreír')">Un mensaje para ti</div>
+            <div class="hidden-message" onclick="showMessage(this, 'No olvides alimentarte bien')">Un recordatorio</div>
+            <div class="hidden-message" onclick="showMessage(this, 'Brillas con luz propia')">Una verdad</div>
+            <div class="hidden-message" onclick="showMessage(this, 'Eres maravillosa')">Para que no lo olvides</div>
+            <div class="hidden-message" onclick="showMessage(this, 'Tu presencia ilumina')">Un secreto más</div>
+            <div class="hidden-message" onclick="showMessage(this, 'Vive cada día con alegría')">Último consejo</div>
+        </div>
+    </div>
+
+    <div class="footer">
+        Diseñado con ❤️ por Ronald Cosme
+    </div>
+
+    <script>
+        // Matrix effect
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        
+        // Katakana characters
+        const katakana = 'アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
+        const latin = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        const nums = '0123456789';
+        const frases = ['Feliz', 'Cumpleaños', 'Camila', 'Celebra', 'Sonríe', 'Vive', 'Ama', 'Sueña'];
+        
+        const alphabet = katakana + latin + nums + frases.join('');
+        
+        const fontSize = 16;
+        const columns = canvas.width / fontSize;
+        
+        const rainDrops = [];
+        
+        for (let x = 0; x < columns; x++) {
+            rainDrops[x] = 1;
+        }
+        
+        const draw = () => {
+            ctx.fillStyle = 'rgba(9, 14, 51, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            ctx.fillStyle = '#4fc3f7';
+            ctx.font = fontSize + 'px monospace';
+            
+            for (let i = 0; i < rainDrops.length; i++) {
+                // Random character
+                const text = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
+                
+                // x = i * fontSize, y = value of rainDrops[i] * fontSize
+                ctx.fillText(text, i * fontSize, rainDrops[i] * fontSize);
+                
+                // Sending the drop back to the top randomly after it has crossed the screen
+                if (rainDrops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    rainDrops[i] = 0;
+                }
+                
+                // Incrementing Y coordinate
+                rainDrops[i]++;
+            }
+        };
+        
+        setInterval(draw, 35);
+
+        // Create floating katakana elements
+        function createKatakana() {
+            const kataElement = document.createElement('div');
+            kataElement.classList.add('katakana');
+            
+            // Random content: katakana or phrases
+            const usePhrase = Math.random() > 0.7;
+            if (usePhrase) {
+                const randomPhrase = frases[Math.floor(Math.random() * frases.length)];
+                kataElement.innerText = randomPhrase;
+            } else {
+                kataElement.innerText = katakana.charAt(Math.floor(Math.random() * katakana.length));
+            }
+            
+            // Random position
+            const xPos = Math.random() * window.innerWidth;
+            const yPos = Math.random() * window.innerHeight;
+            
+            kataElement.style.left = xPos + 'px';
+            kataElement.style.top = yPos + 'px';
+            
+            document.body.appendChild(kataElement);
+            
+            // Remove after some time
+            setTimeout(() => {
+                kataElement.remove();
+            }, 10000);
+        }
+        
+        // Create katakana elements periodically
+        setInterval(createKatakana, 200);
+
+        // Show hearts on click
+        function createHeart(x, y) {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '❤️';
+            
+            // Random position around the clicked point
+            const offsetX = (Math.random() - 0.5) * 50;
+            const offsetY = (Math.random() - 0.5) * 50;
+            
+            heart.style.left = (x + offsetX) + 'px';
+            heart.style.top = (y + offsetY) + 'px';
+            
+            document.body.appendChild(heart);
+            
+            // Remove after animation
+            setTimeout(() => {
+                heart.remove();
+            }, 3000);
+        }
+
+        // Function to show message and create hearts
+        function showMessage(element, message) {
+            element.innerText = message;
+            
+            // Create multiple hearts
+            const rect = element.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+            
+            for (let i = 0; i < 10; i++) {
+                setTimeout(() => {
+                    createHeart(centerX, centerY);
+                }, i * 100);
+            }
+            
+            // Reset after some time
+            setTimeout(() => {
+                element.innerText = "Haz click de nuevo";
+            }, 3000);
+        }
+
+        // Adjust canvas size when window resizes
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+    </script>
+</body>
+</html>
