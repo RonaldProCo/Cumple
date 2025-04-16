@@ -3,268 +3,98 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Feliz Cumpleaños Camila</title>
+    <title>Contrato de Asistencia Ineludible (Edición Extra Cómica)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <style>
+        /* Estilos (sin cambios) */
         body {
-            margin: 0;
-            padding: 0;
-            height: 100vh;
-            background-color: #090e33;
-            color: #fff;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            overflow: hidden;
+            font-family: 'Inter', sans-serif;
+        }
+        h1, h2 {
+            font-family: 'Playfair Display', serif;
+        }
+        .signature-line {
+            border-bottom: 1px solid #374151;
+            margin-top: 2.5rem;
+            margin-bottom: 0.5rem;
+            width: 80%;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .seal {
+            width: 80px;
+            height: 80px;
+            background-color: #dc2626;
+            border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
-            flex-direction: column;
+            color: white;
+            font-weight: bold;
+            font-size: 0.75rem;
             text-align: center;
-        }
-
-        .container {
-            position: relative;
-            z-index: 2;
-            max-width: 800px;
-            padding: 20px;
-        }
-
-        h1 {
-            font-size: 4rem;
-            margin-bottom: 20px;
-            color: #7ce9ff;
-            text-shadow: 0 0 15px #2196f3, 0 0 30px #00bcd4;
-        }
-
-        .mensaje {
-            font-size: 1.5rem;
-            margin-bottom: 30px;
-            line-height: 1.6;
-        }
-
-        .hidden-message {
-            display: inline-block;
-            background-color: rgba(0, 150, 255, 0.2);
-            border-radius: 50px;
-            padding: 10px 20px;
-            margin: 10px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border: 1px solid #1e88e5;
-            box-shadow: 0 0 10px #0d47a1;
-        }
-
-        .hidden-message:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 20px #1565c0;
-        }
-
-        .footer {
-            position: fixed;
-            bottom: 10px;
-            right: 10px;
-            font-size: 0.8rem;
-            opacity: 0.7;
-        }
-
-        .katakana {
-            font-family: 'MS Gothic', 'MS Mincho', sans-serif;
-            position: absolute;
-            color: #4fc3f7;
-            opacity: 0.3;
-            z-index: -1;
-            font-size: 1.5rem;
-            pointer-events: none;
-        }
-
-        .heart {
-            position: absolute;
-            pointer-events: none;
-            color: #ff7e7e;
-            font-size: 2rem;
-            animation: float 3s ease-in-out forwards;
-            opacity: 0;
-            z-index: 10;
-        }
-
-        @keyframes float {
-            0% {
-                transform: translateY(0) scale(0.5);
-                opacity: 0;
-            }
-            20% {
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-100px) scale(1.2);
-                opacity: 0;
-            }
-        }
-
-        #canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -2;
+            line-height: 1.2;
+            border: 3px solid #b91c1c;
+            margin: 2rem auto;
+            transform: rotate(-10deg);
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
         }
     </style>
 </head>
-<body>
-    <canvas id="canvas"></canvas>
+<body class="bg-gray-100 p-6 md:p-12">
 
-    <div class="container">
-        <h1>¡Feliz Cumpleaños Camila!</h1>
-        
-        <div class="mensaje">
-            Feliz cumpleaños. En tu día especial, quería reconocer tu luz y desearte que sigas creciendo con todo lo bueno que mereces. Un abrazo sincero 🌟
+    <div class="max-w-3xl mx-auto bg-white p-8 md:p-10 rounded-lg shadow-lg border border-gray-300">
+
+        <div class="text-center mb-8">
+            <h1 class="text-3xl md:text-4xl font-bold text-gray-800 mb-2">CONTRATO DE ASISTENCIA ULTRA-INELUDIBLE</h1>
+            <p class="text-sm text-gray-500">Documento Más Serio Que Promesa de Político (Es Broma)</p>
+            <div class="w-24 h-1 bg-red-600 mx-auto mt-4 rounded"></div>
         </div>
 
-        <div id="hidden-messages">
-            <div class="hidden-message" onclick="showMessage(this, 'Sonríe, eres especial')">Haz click aquí</div>
-            <div class="hidden-message" onclick="showMessage(this, 'Eres arte en este mundo')">Descubre un secreto</div>
-            <div class="hidden-message" onclick="showMessage(this, 'Nunca dejes de sonreír')">Un mensaje para ti</div>
-            <div class="hidden-message" onclick="showMessage(this, 'No olvides alimentarte bien')">Un recordatorio</div>
-            <div class="hidden-message" onclick="showMessage(this, 'Brillas con luz propia')">Una verdad</div>
-            <div class="hidden-message" onclick="showMessage(this, 'Eres maravillosa')">Para que no lo olvides</div>
-            <div class="hidden-message" onclick="showMessage(this, 'Tu presencia ilumina')">Un secreto más</div>
-            <div class="hidden-message" onclick="showMessage(this, 'Vive cada día con alegría')">Último consejo</div>
+        <div class="mb-6 text-gray-700">
+            <p class="mb-2">Reunidos en este acto solemne (más o menos):</p>
+            <ul class="list-disc list-inside ml-4 mb-4">
+                <li><strong>Ronald C.</strong>, en adelante "La Parte Previamente Evasiva", ahora "Comprometida".</li>
+                <li><strong>Camila S.</strong>, en adelante "La Parte Escéptica Con Memoria de Elefante".</li>
+            </ul>
+            <p>Ambas partes, con cerebros funcionando (se supone) y un nivel de terquedad admirable, pactan bajo juramento (de meñique) lo siguiente:</p>
         </div>
+
+        <div class="mb-8 space-y-4 text-gray-700">
+            <h2 class="text-xl font-semibold text-gray-800 border-b pb-2 mb-4">CLÁUSULAS SAGRADAS (Y DIVERTIDAS)</h2>
+            <p><strong>PRIMERA: EL MOTIVO DE TANTO LÍO.</strong> El objetivo primordial, único e indiscutible de este pergamino digital es grabar en piedra (o en HTML) la asistencia sí-o-sí de "La Parte Comprometida" al magno evento del:</p>
+            <p class="text-center font-bold text-lg text-red-700 my-3">¡Glorioso Sábado, 19 de Abril de 2025!</p>
+            <p><strong>SEGUNDA: PROHIBIDO FALTAR (EN SERIO).</strong> "La Parte Comprometida" jura por su colección de memes favorita que asistirá. Quedan anuladas excusas como: "mi perro se comió la invitación", "me abdujeron brevemente", "se me acabó el internet justo ese día" o "me dio flojera cósmica". El incumplimiento acarreará miradas de reproche nivel experto y el temido "te lo dije".</p>
+            <p><strong>TERCERA: LA DUDA RAZONABLE (Y JUSTIFICADA).</strong> "La Parte Escéptica Con Memoria de Elefante" deja constancia escrita de su escepticismo, basado en evidencia histórica (guiño, guiño), esperando que este documento sirva como amuleto anti-plantones.</p>
+             <p><strong>CUARTA: SI TODO FALLA (OJALÁ NO)...</strong> En el remotísimo e improbable caso de que "La Parte Comprometida" desarrolle amnesia selectiva ese día, la penalización será negociada, pero apunta a: invitar un postre decadente o dedicar una serenata desafinada (vía audio de WhatsApp) a elección de "La Parte Escéptica".</p>
+             <p><strong>QUINTA: VALIDEZ AFECTIVA, NO LEGAL.</strong> Este contrato vale más que la misma ley. Firmado con la intención de salvaguardar algo.</p>
+             <p><strong>SEXTA: OPERACIÓN ANTI-FANTASMA DIGITAL.</strong> Recordando hazañas tecnológicas pasadas, "La Parte Comprometida" promete solemnemente no activar el modo fantasma ni usar el botón de bloqueo como escudo pre-salida. Hacerlo sería... bueno, muy tú, pero ¡no lo hagas!</p>
+        </div>
+
+        <div class="mt-10 pt-6 border-t border-gray-300">
+             <p class="text-center text-gray-600 mb-6">Y para que no digan que no se avisó, y con la esperanza de que este contrato no sea necesario en el futuro (pero por si acaso), firman abajo los implicados en Lima, Perú, a 16 de Abril de 2025, bajo la atenta mirada de los dioses del buen humor.</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-center">
+                <div>
+                    <span class="signature-line"></span>
+                    <p class="font-semibold text-gray-800">Ronald C.</p>
+                    <p class="text-sm text-gray-500">(La Parte ¿Comprometida?)</p> </div>
+                <div>
+                    <span class="signature-line"></span>
+                    <p class="font-semibold text-gray-800">Camila S.</p>
+                    <p class="text-sm text-gray-500">(La Parte Escéptica Vigilante)</p> </div>
+            </div>
+        </div>
+
+        <div class="seal">
+            ¡SELLO<br>ANTI-<br>BLOQUEO!
+        </div>
+
     </div>
 
-    <div class="footer">
-        Diseñado con ❤️ por Ronald Cosme
-    </div>
-
-    <script>
-        // Matrix effect
-        const canvas = document.getElementById('canvas');
-        const ctx = canvas.getContext('2d');
-        
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-        
-        // Katakana characters
-        const katakana = 'アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
-        const latin = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        const nums = '0123456789';
-        const frases = ['Feliz', 'Cumpleaños', 'Camila', 'Celebra', 'Sonríe', 'Vive', 'Ama', 'Sueña'];
-        
-        const alphabet = katakana + latin + nums + frases.join('');
-        
-        const fontSize = 16;
-        const columns = canvas.width / fontSize;
-        
-        const rainDrops = [];
-        
-        for (let x = 0; x < columns; x++) {
-            rainDrops[x] = 1;
-        }
-        
-        const draw = () => {
-            ctx.fillStyle = 'rgba(9, 14, 51, 0.05)';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            
-            ctx.fillStyle = '#4fc3f7';
-            ctx.font = fontSize + 'px monospace';
-            
-            for (let i = 0; i < rainDrops.length; i++) {
-                // Random character
-                const text = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
-                
-                // x = i * fontSize, y = value of rainDrops[i] * fontSize
-                ctx.fillText(text, i * fontSize, rainDrops[i] * fontSize);
-                
-                // Sending the drop back to the top randomly after it has crossed the screen
-                if (rainDrops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-                    rainDrops[i] = 0;
-                }
-                
-                // Incrementing Y coordinate
-                rainDrops[i]++;
-            }
-        };
-        
-        setInterval(draw, 35);
-
-        // Create floating katakana elements
-        function createKatakana() {
-            const kataElement = document.createElement('div');
-            kataElement.classList.add('katakana');
-            
-            // Random content: katakana or phrases
-            const usePhrase = Math.random() > 0.7;
-            if (usePhrase) {
-                const randomPhrase = frases[Math.floor(Math.random() * frases.length)];
-                kataElement.innerText = randomPhrase;
-            } else {
-                kataElement.innerText = katakana.charAt(Math.floor(Math.random() * katakana.length));
-            }
-            
-            // Random position
-            const xPos = Math.random() * window.innerWidth;
-            const yPos = Math.random() * window.innerHeight;
-            
-            kataElement.style.left = xPos + 'px';
-            kataElement.style.top = yPos + 'px';
-            
-            document.body.appendChild(kataElement);
-            
-            // Remove after some time
-            setTimeout(() => {
-                kataElement.remove();
-            }, 10000);
-        }
-        
-        // Create katakana elements periodically
-        setInterval(createKatakana, 200);
-
-        // Show hearts on click
-        function createHeart(x, y) {
-            const heart = document.createElement('div');
-            heart.classList.add('heart');
-            heart.innerHTML = '❤️';
-            
-            // Random position around the clicked point
-            const offsetX = (Math.random() - 0.5) * 50;
-            const offsetY = (Math.random() - 0.5) * 50;
-            
-            heart.style.left = (x + offsetX) + 'px';
-            heart.style.top = (y + offsetY) + 'px';
-            
-            document.body.appendChild(heart);
-            
-            // Remove after animation
-            setTimeout(() => {
-                heart.remove();
-            }, 3000);
-        }
-
-        // Function to show message and create hearts
-        function showMessage(element, message) {
-            element.innerText = message;
-            
-            // Create multiple hearts
-            const rect = element.getBoundingClientRect();
-            const centerX = rect.left + rect.width / 2;
-            const centerY = rect.top + rect.height / 2;
-            
-            for (let i = 0; i < 10; i++) {
-                setTimeout(() => {
-                    createHeart(centerX, centerY);
-                }, i * 100);
-            }
-            
-            // Reset after some time
-            setTimeout(() => {
-                element.innerText = "Haz click de nuevo";
-            }, 3000);
-        }
-
-        // Adjust canvas size when window resizes
-        window.addEventListener('resize', () => {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        });
-    </script>
 </body>
 </html>
