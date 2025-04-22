@@ -23,6 +23,10 @@
             padding: 1.25rem;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            display: flex; /* Usar flexbox para alinear contenido */
+            flex-direction: column; /* Apilar contenido verticalmente */
+            justify-content: space-between; /* Distribuir espacio */
+            min-height: 130px; /* Altura mínima para consistencia */
         }
         .day-card:hover {
             transform: translateY(-3px);
@@ -49,6 +53,39 @@
             margin-bottom: 1rem;
             font-style: italic;
         }
+        /* Estilos para el contenido de la tarjeta */
+        .card-content {
+           flex-grow: 1; /* Permite que el contenido crezca */
+        }
+        .card-day {
+            display: block;
+            font-size: 0.75rem; /* 12px */
+            font-weight: 600; /* semibold */
+            color: #9333ea; /* purple-600 */
+            margin-bottom: 0.5rem; /* mb-2 */
+            letter-spacing: 0.05em; /* tracking-wider */
+        }
+        .card-title {
+            color: #374151; /* gray-700 */
+            font-weight: 500; /* medium */
+        }
+        .card-subtitle {
+            font-size: 0.875rem; /* 14px */
+            color: #6b7280; /* gray-500 */
+            margin-top: 0.25rem; /* mt-1 */
+        }
+        /* Estilo para tarjetas placeholder */
+         .placeholder-card {
+            border-style: dashed;
+            border-color: #d8b4fe; /* purple-300 */
+            background-color: #faf5ff; /* purple-50 */
+            opacity: 0.8;
+         }
+         .placeholder-text {
+            color: #9333ea; /* purple-600 */
+            font-style: italic;
+         }
+
     </style>
 </head>
 <body class="min-h-screen p-4 md:p-8">
@@ -70,52 +107,86 @@
                 <h2 class="text-2xl font-semibold text-purple-700 mb-8 text-center">Calendario de Aventuras</h2>
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                     <div class="day-card">
-                        <span class="block text-xs font-semibold text-purple-500 mb-2 tracking-wider">DÍA 1</span>
-                        <p class="text-gray-700 font-medium">Noche de cine en casa</p>
-                        <p class="text-sm text-gray-500 mt-1">¡Con mantita y snacks!</p>
+                        <div class="card-content">
+                            <span class="card-day">DÍA 1</span>
+                            <p class="card-title">Noche de cine en casa</p>
+                        </div>
+                        <p class="card-subtitle">¡Con mantita y snacks!</p>
                     </div>
                     <div class="day-card">
-                        <span class="block text-xs font-semibold text-purple-500 mb-2 tracking-wider">DÍA 2</span>
-                        <p class="text-gray-700 font-medium">Cena romántica casera</p>
-                         <p class="text-sm text-gray-500 mt-1">Cocinamos nuestro plato favorito.</p>
+                         <div class="card-content">
+                            <span class="card-day">DÍA 2</span>
+                            <p class="card-title">Cena romántica casera</p>
+                         </div>
+                         <p class="card-subtitle">Cocinamos nuestro plato favorito.</p>
                     </div>
                     <div class="day-card">
-                        <span class="block text-xs font-semibold text-purple-500 mb-2 tracking-wider">DÍA 3</span>
-                        <p class="text-gray-700 font-medium">Visita al zoológico o acuario</p>
-                        <p class="text-sm text-gray-500 mt-1">Un día entre animales.</p>
+                        <div class="card-content">
+                            <span class="card-day">DÍA 3</span>
+                            <p class="card-title">Visita al zoológico o acuario</p>
+                        </div>
+                        <p class="card-subtitle">Un día entre animales.</p>
                     </div>
                     <div class="day-card">
-                        <span class="block text-xs font-semibold text-purple-500 mb-2 tracking-wider">DÍA 4</span>
-                        <p class="text-gray-700 font-medium">Noche de pintura y vino</p>
-                        <p class="text-sm text-gray-500 mt-1">¡A sacar el artista que llevamos dentro!</p>
+                        <div class="card-content">
+                            <span class="card-day">DÍA 4</span>
+                            <p class="card-title">Noche de pintura y vino</p>
+                        </div>
+                        <p class="card-subtitle">¡A sacar el artista!</p>
                     </div>
                     <div class="day-card">
-                        <span class="block text-xs font-semibold text-purple-500 mb-2 tracking-wider">DÍA 5</span>
-                        <p class="text-gray-700 font-medium">Visitar un museo</p>
-                        <p class="text-sm text-gray-500 mt-1">Cultura y descubrimiento.</p>
+                         <div class="card-content">
+                            <span class="card-day">DÍA 5</span>
+                            <p class="card-title">Visitar un museo</p>
+                         </div>
+                        <p class="card-subtitle">Cultura y descubrimiento.</p>
                     </div>
                     <div class="day-card">
-                        <span class="block text-xs font-semibold text-purple-500 mb-2 tracking-wider">DÍA 6</span>
-                        <p class="text-gray-700 font-medium">Concierto de mutuo acuerdo</p>
-                        <p class="text-sm text-gray-500 mt-1">¡Música para el alma!</p>
+                         <div class="card-content">
+                            <span class="card-day">DÍA 6</span>
+                            <p class="card-title">Concierto de mutuo acuerdo</p>
+                         </div>
+                        <p class="card-subtitle">¡Música para el alma!</p>
+                    </div>
+                    <div class="day-card">
+                         <div class="card-content">
+                            <span class="card-day">DÍA 7</span>
+                            <p class="card-title">Noche de Comida Japonesa</p>
+                         </div>
+                        <p class="card-subtitle">Sushi, ramen, ¡lo que más nos guste!</p>
+                    </div>
+                    <div class="day-card">
+                         <div class="card-content">
+                            <span class="card-day">DÍA 8</span>
+                            <p class="card-title">Día de Juegos Mecánicos</p>
+                         </div>
+                        <p class="card-subtitle">¡Adrenalina y diversión!</p>
                     </div>
 
-                    <div class="day-card border-dashed border-purple-300 bg-purple-50 opacity-80">
-                        <span class="block text-xs font-semibold text-purple-500 mb-2 tracking-wider">DÍA 7</span>
-                        <p class="text-purple-600 italic">Plan por definir...</p>
+                    <div class="day-card placeholder-card">
+                         <div class="card-content">
+                            <span class="card-day">DÍA 9</span>
+                            <p class="placeholder-text">Plan por definir...</p>
+                         </div>
                     </div>
-                     <div class="day-card border-dashed border-purple-300 bg-purple-50 opacity-80">
-                        <span class="block text-xs font-semibold text-purple-500 mb-2 tracking-wider">DÍA 8</span>
-                        <p class="text-purple-600 italic">¡Sorpresa!</p>
+                     <div class="day-card placeholder-card">
+                          <div class="card-content">
+                            <span class="card-day">DÍA 10</span>
+                            <p class="placeholder-text">¡Sorpresa!</p>
+                          </div>
                     </div>
-                     <div class="day-card border-dashed border-purple-300 bg-purple-50 opacity-80">
-                        <span class="block text-xs font-semibold text-purple-500 mb-2 tracking-wider">DÍA 9 - 29</span>
-                        <p class="text-purple-600 italic">Aventuras pendientes...</p>
+                     <div class="day-card placeholder-card">
+                          <div class="card-content">
+                            <span class="card-day">DÍA 11 - 29</span>
+                            <p class="placeholder-text">Aventuras pendientes...</p>
+                          </div>
                     </div>
 
                     <div class="day-card final-day-card">
-                        <span class="block text-xs font-semibold text-purple-100 mb-2 tracking-wider">DÍA 30 - GRAN FINAL</span>
-                        <p class="font-semibold text-lg">Cena especial</p>
+                        <div class="card-content">
+                            <span class="block text-xs font-semibold text-purple-100 mb-2 tracking-wider">DÍA 30 - GRAN FINAL</span>
+                            <p class="font-semibold text-lg">Cena especial</p>
+                        </div>
                         <p class="text-sm text-purple-100 mt-1">Restaurante Museo Larco</p>
                     </div>
                 </div>
@@ -228,17 +299,9 @@
             } else {
                 console.error("El botón de cálculo no se encontró en el DOM.");
             }
-
-             // Opcional: Calcular al cambiar cualquier input (si prefieres que sea automático)
-             // [montoXInput, porcentajeYInput, diaRetiroInput].forEach(input => {
-             //    input.addEventListener('input', calcularPenalizacion);
-             // });
         });
     </script>
 
 </body>
 </html>
 
-
-</body>
-</html>
