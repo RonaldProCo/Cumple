@@ -3,113 +3,242 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contrato de Asistencia Ineludible (Edición Extra Cómica con Firma)</title>
+    <title>Nuestro Reto de 30 Días - Edición Púrpura</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Inter:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
     <style>
-        /* Estilos generales */
+        /* Estilo para usar la fuente Inter y ajustes base */
         body {
             font-family: 'Inter', sans-serif;
+            background-color: #f3e8ff; /* Fondo lila muy pálido */
         }
-        h1, h2 {
-            font-family: 'Playfair Display', serif;
+        /* Estilo minimalista para las tarjetas */
+        .day-card {
+            background-color: white;
+            border: 1px solid #e9d5ff; /* Borde lila pálido */
+            border-radius: 0.75rem; /* Bordes más redondeados */
+            padding: 1.25rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
         }
-        /* Estilo para la línea de firma */
-        .signature-line {
-            border-bottom: 1px solid #374151; /* Gris oscuro */
-            margin-top: 2.5rem; /* Espacio arriba */
-            margin-bottom: 0.5rem; /* Espacio abajo */
-            width: 80%; /* Ancho de la línea */
-            display: block; /* Para que ocupe el ancho */
-            margin-left: auto;
-            margin-right: auto;
+        .day-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 15px -3px rgba(168, 85, 247, 0.15), 0 4px 6px -2px rgba(168, 85, 247, 0.1); /* Sombra púrpura suave */
         }
-        /* Estilo para el sello simulado */
-        .seal {
-            width: 80px;
-            height: 80px;
-            background-color: #dc2626; /* Rojo */
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+        /* Estilo para la tarjeta del día 30 */
+        .final-day-card {
+            background: linear-gradient(135deg, #c084fc, #a855f7); /* Gradiente púrpura */
             color: white;
-            font-weight: bold;
-            font-size: 0.75rem; /* Tamaño de fuente pequeño */
-            text-align: center;
-            line-height: 1.2;
-            border: 3px solid #b91c1c; /* Borde rojo más oscuro */
-            margin: 2rem auto; /* Margen */
-            transform: rotate(-10deg); /* Rotación ligera */
-            box-shadow: 2px 2px 5px rgba(0,0,0,0.2); /* Sombra */
+            border: none;
+            transform: scale(1.03);
         }
-        /* Estilo para el texto de la firma */
-        .signature-text {
-            font-family: 'Dancing Script', cursive; /* Fuente cursiva */
-            font-size: 2.8rem; /* Tamaño de la firma */
-            color: #1e40af; /* Color tinta azul oscuro */
-            display: block; /* Para posicionamiento */
-            margin-bottom: -2rem; /* Solapar ligeramente la línea (ajustar si es necesario) */
-            margin-left: 1.5rem; /* Indentación desde la izquierda */
-            transform: rotate(-6deg); /* Ángulo ligero */
-            position: relative; /* Para asegurar que esté sobre la línea */
-            z-index: 1; /* Poner sobre la línea */
+         /* Placeholder para imagen de Gerbera */
+        .gerbera-placeholder {
+            width: 100%;
+            height: 150px; /* Ajusta la altura según necesites */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background-color: #e9d5ff; /* Fondo lila */
+            color: #6b21a8; /* Texto púrpura oscuro */
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+            font-style: italic;
         }
     </style>
 </head>
-<body class="bg-gray-100 p-6 md:p-12">
+<body class="min-h-screen p-4 md:p-8">
 
-    <div class="max-w-3xl mx-auto bg-white p-8 md:p-10 rounded-lg shadow-lg border border-gray-300">
+    <div class="max-w-6xl mx-auto bg-white rounded-2xl shadow-xl overflow-hidden border border-purple-100">
 
-        <div class="text-center mb-8">
-            <h1 class="text-3xl md:text-4xl font-bold text-gray-800 mb-2">CONTRATO DE ASISTENCIA ULTRA-INELUDIBLE</h1>
-            <p class="text-sm text-gray-500">Documento Más Serio Que Promesa de Político (Es Broma)</p>
-            <div class="w-24 h-1 bg-red-600 mx-auto mt-4 rounded"></div>
-        </div>
-
-        <div class="mb-6 text-gray-700">
-            <p class="mb-2">Reunidos en este acto solemne (más o menos):</p>
-            <ul class="list-disc list-inside ml-4 mb-4">
-                <li><strong>Ronald C.</strong>, en adelante "La Parte Previamente Evasiva", ahora "Comprometida".</li>
-                <li><strong>Camila S.</strong>, en adelante "La Parte Escéptica Con Memoria de Elefante".</li>
-            </ul>
-            <p>Ambas partes, con cerebros funcionando (se supone) y un nivel de terquedad admirable, pactan bajo juramento (de meñique) lo siguiente:</p>
-        </div>
-
-        <div class="mb-8 space-y-4 text-gray-700">
-            <h2 class="text-xl font-semibold text-gray-800 border-b pb-2 mb-4">CLÁUSULAS SAGRADAS (Y DIVERTIDAS)</h2>
-            <p><strong>PRIMERA: EL MOTIVO DE TANTO LÍO.</strong> El objetivo primordial, único e indiscutible de este pergamino digital es grabar en piedra (o en HTML) la asistencia sí-o-sí de "La Parte Comprometida" al magno evento del:</p>
-            <p class="text-center font-bold text-lg text-red-700 my-3">¡Glorioso Sábado, 19 de Abril de 2025!</p>
-            <p><strong>SEGUNDA: PROHIBIDO FALTAR (EN SERIO).</strong> "La Parte Comprometida" jura por su colección de memes favorita que asistirá. Quedan anuladas excusas como: "mi perro se comió la invitación", "me abdujeron brevemente", "se me acabó el internet justo ese día" o "me dio flojera cósmica". El incumplimiento acarreará miradas de reproche nivel experto y el temido "te lo dije".</p>
-            <p><strong>TERCERA: LA DUDA RAZONABLE (Y JUSTIFICADA).</strong> "La Parte Escéptica Con Memoria de Elefante" deja constancia escrita de su escepticismo, basado en evidencia histórica (guiño, guiño), esperando que este documento sirva como amuleto anti-plantones.</p>
-             <p><strong>CUARTA: SI TODO FALLA (OJALÁ NO)...</strong> En el remotísimo e improbable caso de que "La Parte Comprometida" desarrolle amnesia selectiva ese día, la penalización será negociada, pero apunta a: invitar un postre decadente o dedicar una serenata desafinada (vía audio de WhatsApp) a elección de "La Parte Escéptica".</p>
-             <p><strong>QUINTA: VALIDEZ AFECTIVA, NO LEGAL.</strong> Este contrato vale más que la misma ley. Firmado con la intención de salvaguardar algo.</p> <p><strong>SEXTA: OPERACIÓN ANTI-FANTASMA DIGITAL.</strong> Recordando hazañas tecnológicas pasadas, "La Parte Comprometida" promete solemnemente no activar el modo fantasma ni usar el botón de bloqueo como escudo pre-salida. Hacerlo sería... bueno, muy tú, pero ¡no lo hagas!</p>
-        </div>
-
-        <div class="mt-10 pt-6 border-t border-gray-300">
-             <p class="text-center text-gray-600 mb-6">Y para que no digan que no se avisó, y con la esperanza de que este contrato no sea necesario en el futuro (pero por si acaso), firman abajo los implicados en Lima, Perú, a 16 de Abril de 2025, bajo la atenta mirada de los dioses .</p>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-center">
-                <div>
-                    <span class="signature-text">R</span>
-                    <span class="signature-line"></span>
-                    <p class="font-semibold text-gray-800">Ronald C.</p>
-                    <p class="text-sm text-gray-500">(La Parte ¿Comprometida?)</p>
-                </div>
-                <div>
-                    <span class="signature-line"></span>
-                    <p class="font-semibold text-gray-800">Camila S.</p>
-                    <p class="text-sm text-gray-500">(La Parte Escéptica Vigilante)</p>
-                </div>
+        <header class="p-6 md:p-10 text-center relative">
+             <div class="gerbera-placeholder">
+                <i class="fas fa-spa fa-3x text-purple-400" aria-hidden="true"></i> <span class="ml-3">[Imagen de Gerberas Púrpuras]</span>
             </div>
-        </div>
+            <h1 class="text-3xl md:text-4xl font-bold text-purple-800 mb-2">Nuestro Reto de 30 Días</h1>
+            <p class="text-lg text-purple-600">30 días, 30 citas, infinitos recuerdos.</p>
+            <hr class="mt-6 border-purple-200 w-1/4 mx-auto">
+        </header>
 
-        <div class="seal">
-            ¡SELLO<br>ANTI-<br>BLOQUEO! </div>
+        <main class="p-6 md:p-10">
+
+            <section id="actividades" class="mb-12">
+                <h2 class="text-2xl font-semibold text-purple-700 mb-8 text-center">Calendario de Aventuras</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                    <div class="day-card">
+                        <span class="block text-xs font-semibold text-purple-500 mb-2 tracking-wider">DÍA 1</span>
+                        <p class="text-gray-700 font-medium">Noche de cine en casa</p>
+                        <p class="text-sm text-gray-500 mt-1">¡Con mantita y snacks!</p>
+                    </div>
+                    <div class="day-card">
+                        <span class="block text-xs font-semibold text-purple-500 mb-2 tracking-wider">DÍA 2</span>
+                        <p class="text-gray-700 font-medium">Cena romántica casera</p>
+                         <p class="text-sm text-gray-500 mt-1">Cocinamos nuestro plato favorito.</p>
+                    </div>
+                    <div class="day-card">
+                        <span class="block text-xs font-semibold text-purple-500 mb-2 tracking-wider">DÍA 3</span>
+                        <p class="text-gray-700 font-medium">Visita al zoológico o acuario</p>
+                        <p class="text-sm text-gray-500 mt-1">Un día entre animales.</p>
+                    </div>
+                    <div class="day-card">
+                        <span class="block text-xs font-semibold text-purple-500 mb-2 tracking-wider">DÍA 4</span>
+                        <p class="text-gray-700 font-medium">Noche de pintura y vino</p>
+                        <p class="text-sm text-gray-500 mt-1">¡A sacar el artista que llevamos dentro!</p>
+                    </div>
+                    <div class="day-card">
+                        <span class="block text-xs font-semibold text-purple-500 mb-2 tracking-wider">DÍA 5</span>
+                        <p class="text-gray-700 font-medium">Visitar un museo</p>
+                        <p class="text-sm text-gray-500 mt-1">Cultura y descubrimiento.</p>
+                    </div>
+                    <div class="day-card">
+                        <span class="block text-xs font-semibold text-purple-500 mb-2 tracking-wider">DÍA 6</span>
+                        <p class="text-gray-700 font-medium">Concierto de mutuo acuerdo</p>
+                        <p class="text-sm text-gray-500 mt-1">¡Música para el alma!</p>
+                    </div>
+
+                    <div class="day-card border-dashed border-purple-300 bg-purple-50 opacity-80">
+                        <span class="block text-xs font-semibold text-purple-500 mb-2 tracking-wider">DÍA 7</span>
+                        <p class="text-purple-600 italic">Plan por definir...</p>
+                    </div>
+                     <div class="day-card border-dashed border-purple-300 bg-purple-50 opacity-80">
+                        <span class="block text-xs font-semibold text-purple-500 mb-2 tracking-wider">DÍA 8</span>
+                        <p class="text-purple-600 italic">¡Sorpresa!</p>
+                    </div>
+                     <div class="day-card border-dashed border-purple-300 bg-purple-50 opacity-80">
+                        <span class="block text-xs font-semibold text-purple-500 mb-2 tracking-wider">DÍA 9 - 29</span>
+                        <p class="text-purple-600 italic">Aventuras pendientes...</p>
+                    </div>
+
+                    <div class="day-card final-day-card">
+                        <span class="block text-xs font-semibold text-purple-100 mb-2 tracking-wider">DÍA 30 - GRAN FINAL</span>
+                        <p class="font-semibold text-lg">Cena especial</p>
+                        <p class="text-sm text-purple-100 mt-1">Restaurante Museo Larco</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="penalizacion" class="bg-purple-50 p-6 md:p-8 rounded-lg border border-purple-200">
+                <h2 class="text-2xl font-semibold text-purple-700 mb-6 text-center">Las Reglas del Cariño</h2>
+                <p class="text-gray-600 mb-6 text-center max-w-2xl mx-auto">
+                    Este reto es un compromiso divertido. Si por alguna razón uno no puede continuar, esta es la fórmula simbólica para compensar al otro por las aventuras perdidas.
+                </p>
+                <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200 max-w-lg mx-auto">
+                    <h3 class="text-lg font-semibold text-purple-800 mb-4 text-center">Calculadora de Penalización</h3>
+                    <div class="space-y-4 mb-6">
+                        <div>
+                            <label for="monto_x" class="block text-sm font-medium text-gray-700 mb-1">Monto base por día (S/):</label>
+                            <input type="number" id="monto_x" name="monto_x" placeholder="Ej: 50" class="w-full p-2 border border-gray-300 rounded-md focus:ring-purple-500 focus:border-purple-500">
+                        </div>
+                        <div>
+                            <label for="porcentaje_y" class="block text-sm font-medium text-gray-700 mb-1">Porcentaje adicional (%):</label>
+                            <input type="number" id="porcentaje_y" name="porcentaje_y" placeholder="Ej: 10" class="w-full p-2 border border-gray-300 rounded-md focus:ring-purple-500 focus:border-purple-500">
+                        </div>
+                        <div>
+                            <label for="dia_retiro" class="block text-sm font-medium text-gray-700 mb-1">Día en que se retira (1-29):</label>
+                            <input type="number" id="dia_retiro" name="dia_retiro" min="1" max="29" placeholder="Ej: 15" class="w-full p-2 border border-gray-300 rounded-md focus:ring-purple-500 focus:border-purple-500">
+                        </div>
+                    </div>
+                    <div class="text-center mb-4">
+                         <button id="calculateBtn" class="bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 px-6 rounded-md transition duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2">
+                            Calcular Penalización
+                        </button>
+                    </div>
+                    <div id="resultado_penalizacion" class="mt-6 p-4 bg-purple-100 border border-purple-300 rounded-md text-center min-h-[60px] flex items-center justify-center">
+                        <span class="text-purple-800 font-medium">El resultado aparecerá aquí.</span>
+                    </div>
+                     <p class="mt-4 text-xs text-gray-500 italic text-center">
+                        Fórmula: (Días Faltantes * Monto X) + (Y% de [30 * Monto X])
+                    </p>
+                </div>
+                 <p class="mt-6 text-center text-purple-600 font-medium">
+                    ¡Pero crucemos los dedos para llegar juntos al día 30! <i class="fas fa-heart text-purple-500"></i>
+                 </p>
+            </section>
+
+        </main>
+
+        <footer class="text-center p-6 text-sm text-purple-500 bg-purple-50 border-t border-purple-100">
+            Hecho con cariño para nuestra aventura de 30 días.
+        </footer>
 
     </div>
+
+    <script>
+        // Espera a que el contenido del DOM esté cargado
+        document.addEventListener('DOMContentLoaded', () => {
+            // Obtiene referencias a los elementos del DOM
+            const montoXInput = document.getElementById('monto_x');
+            const porcentajeYInput = document.getElementById('porcentaje_y');
+            const diaRetiroInput = document.getElementById('dia_retiro');
+            const calculateBtn = document.getElementById('calculateBtn');
+            const resultadoDiv = document.getElementById('resultado_penalizacion');
+
+            // Función para calcular la penalización
+            function calcularPenalizacion() {
+                // Obtiene los valores de los inputs y los convierte a número
+                const montoX = parseFloat(montoXInput.value);
+                const porcentajeY = parseFloat(porcentajeYInput.value);
+                const diaRetiro = parseInt(diaRetiroInput.value, 10); // Asegura que sea entero base 10
+
+                // Limpia el resultado anterior
+                resultadoDiv.innerHTML = ''; // Limpia contenido previo
+                resultadoDiv.classList.remove('bg-red-100', 'border-red-300', 'text-red-800', 'bg-green-100', 'border-green-300', 'text-green-800'); // Quita clases de estado
+                resultadoDiv.classList.add('bg-purple-100', 'border-purple-300'); // Restaura clases base
+
+                // Validación básica de entradas
+                if (isNaN(montoX) || montoX <= 0) {
+                    resultadoDiv.innerHTML = '<span class="text-red-700 font-medium">Por favor, ingresa un Monto X válido (mayor que 0).</span>';
+                    resultadoDiv.classList.add('bg-red-100', 'border-red-300');
+                    return; // Detiene la ejecución si la entrada no es válida
+                }
+                if (isNaN(porcentajeY) || porcentajeY < 0) {
+                     resultadoDiv.innerHTML = '<span class="text-red-700 font-medium">Por favor, ingresa un Porcentaje Y válido (0 o mayor).</span>';
+                     resultadoDiv.classList.add('bg-red-100', 'border-red-300');
+                    return;
+                }
+                 if (isNaN(diaRetiro) || diaRetiro < 1 || diaRetiro > 29) {
+                     resultadoDiv.innerHTML = '<span class="text-red-700 font-medium">Por favor, ingresa un Día de Retiro válido (entre 1 y 29).</span>';
+                     resultadoDiv.classList.add('bg-red-100', 'border-red-300');
+                    return;
+                }
+
+                // Calcula los días faltantes
+                const diasFaltantes = 30 - diaRetiro;
+
+                // Calcula las dos partes de la penalización
+                const penalizacionBase = diasFaltantes * montoX;
+                const penalizacionPorcentual = (porcentajeY / 100) * (30 * montoX);
+
+                // Calcula la penalización total
+                const penalizacionTotal = penalizacionBase + penalizacionPorcentual;
+
+                // Muestra el resultado formateado como moneda (asumiendo Soles Peruanos S/)
+                resultadoDiv.innerHTML = `<span class="text-purple-800 font-bold text-lg">Penalización Total: S/ ${penalizacionTotal.toFixed(2)}</span>`;
+                resultadoDiv.classList.remove('bg-purple-100', 'border-purple-300'); // Quita clases base si todo ok
+                resultadoDiv.classList.add('bg-green-100', 'border-green-300', 'text-green-800'); // Añade clases de éxito
+            }
+
+            // Añade el event listener al botón
+            if (calculateBtn) {
+                calculateBtn.addEventListener('click', calcularPenalizacion);
+            } else {
+                console.error("El botón de cálculo no se encontró en el DOM.");
+            }
+
+             // Opcional: Calcular al cambiar cualquier input (si prefieres que sea automático)
+             // [montoXInput, porcentajeYInput, diaRetiroInput].forEach(input => {
+             //    input.addEventListener('input', calcularPenalizacion);
+             // });
+        });
+    </script>
+
+</body>
+</html>
+
 
 </body>
 </html>
