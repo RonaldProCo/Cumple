@@ -3,95 +3,143 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nuestro Reto de 30 Días - Progreso</title>
+    <title>Nuestro Reto de 30 Días - Progreso Animado</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
     <style>
         /* Estilos base y fuente */
         body {
             font-family: 'Inter', sans-serif;
             background-color: #f3e8ff; /* Fondo lila muy pálido */
+            color: #374151;
         }
-        /* Estilo tarjetas */
+        /* Contenedor principal */
+        .main-container {
+            max-width: 7xl;
+            margin-left: auto;
+            margin-right: auto;
+            background-color: white;
+            border-radius: 1rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+            overflow: hidden;
+            border: 1px solid #e9d5ff;
+        }
+
+        /* --- ANIMACIONES --- */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        @keyframes checkPop {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+        @keyframes finalGlow {
+             0%, 100% { box-shadow: 0 0 15px 5px rgba(255, 255, 255, 0.3); }
+             50% { box-shadow: 0 0 25px 10px rgba(255, 255, 255, 0.5); }
+        }
+
+        /* Aplicar animación de entrada a las tarjetas */
         .day-card {
+            /* ... (estilos existentes) ... */
             background-color: white;
             border: 1px solid #e9d5ff;
             border-radius: 0.75rem;
             padding: 1.25rem;
-            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, border-color 0.3s ease; /* Añadida border-color */
+            box-shadow: 0 2px 4px rgba(0,0,0,0.04);
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            min-height: 140px; /* Altura mínima consistente */
-            position: relative; /* Para posicionar el checkbox */
+            min-height: 150px;
+            position: relative;
+            opacity: 0; /* Inicia invisible */
+            animation: fadeIn 0.5s ease-out forwards; /* Aplica fadeIn */
         }
+        /* Staggered animation delay (opcional pero agradable) */
+        .grid > .day-card:nth-child(1) { animation-delay: 0.05s; }
+        .grid > .day-card:nth-child(2) { animation-delay: 0.1s; }
+        .grid > .day-card:nth-child(3) { animation-delay: 0.15s; }
+        .grid > .day-card:nth-child(4) { animation-delay: 0.2s; }
+        .grid > .day-card:nth-child(5) { animation-delay: 0.25s; }
+        /* ... (continuar para más tarjetas si se desea un efecto más largo) */
+
         .day-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 15px -3px rgba(168, 85, 247, 0.15), 0 4px 6px -2px rgba(168, 85, 247, 0.1);
+            transform: translateY(-5px) scale(1.02); /* Efecto hover más pronunciado */
+            box-shadow: 0 12px 25px -5px rgba(168, 85, 247, 0.2), 0 5px 10px -3px rgba(168, 85, 247, 0.15);
+            border-color: #c084fc; /* Resaltar borde en hover */
         }
+
         /* Estilo tarjeta final */
         .final-day-card {
             background: linear-gradient(135deg, #c084fc, #a855f7);
             color: white;
             border: none;
-            transform: scale(1.03);
+            /* transform: scale(1.03); Ya no es necesario con la animación */
+            animation: fadeIn 0.5s ease-out 0.5s forwards, finalGlow 2.5s ease-in-out infinite 1s; /* Fade in y luego glow */
         }
          .final-day-card .card-day,
          .final-day-card .card-title,
          .final-day-card .card-subtitle {
-             color: white; /* Asegurar texto blanco en tarjeta final */
+             color: white;
          }
          .final-day-card .custom-checkbox {
-             border-color: rgba(255, 255, 255, 0.7); /* Borde blanco semitransparente */
+             border-color: rgba(255, 255, 255, 0.7);
          }
          .final-day-card .custom-checkbox:checked {
-              background-color: rgba(255, 255, 255, 0.3); /* Fondo blanco semitransparente */
-              border-color: white;
+             background-color: rgba(255, 255, 255, 0.3);
+             border-color: white;
          }
          .final-day-card .custom-checkbox:checked::before {
-             color: white; /* Check blanco */
+             color: white;
          }
 
-        /* Placeholder Gerbera */
-        .gerbera-placeholder {
-            width: 100%; height: 150px; display: flex; align-items: center; justify-content: center;
-            text-align: center; background-color: #e9d5ff; color: #6b21a8;
-            border-radius: 0.5rem; margin-bottom: 1rem; font-style: italic;
+        /* Icono cabecera */
+        .header-icon-placeholder {
+             width: 100%; height: 100px; display: flex; align-items: center; justify-content: center;
+             text-align: center; background-color: #f3e8ff; color: #a855f7;
+             border-radius: 0.5rem; margin-bottom: 1.5rem;
         }
+        /* Animación pulso para el icono */
+        .header-icon-placeholder .fa-heart-pulse {
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
         /* Estilos contenido tarjeta */
-        .card-content { flex-grow: 1; padding-right: 30px; /* Espacio para el checkbox */ }
-        .card-day { display: block; font-size: 0.75rem; font-weight: 600; color: #9333ea; margin-bottom: 0.5rem; letter-spacing: 0.05em; }
-        .card-title { color: #374151; font-weight: 500; transition: color 0.3s ease; }
-        .card-subtitle { font-size: 0.875rem; color: #6b7280; margin-top: 0.25rem; transition: color 0.3s ease; }
-        /* Estilos tarjeta placeholder */
-        .placeholder-card { border-style: dashed; border-color: #d8b4fe; background-color: #faf5ff; opacity: 0.8; }
-        .placeholder-text { color: #9333ea; font-style: italic; }
+        .card-content { flex-grow: 1; padding-right: 35px; }
+        .card-day { display: block; font-size: 0.7rem; font-weight: 700; color: #9333ea; margin-bottom: 0.5rem; letter-spacing: 0.08em; text-transform: uppercase; }
+        .card-title { color: #374151; font-weight: 600; font-size: 1rem; transition: color 0.3s ease; margin-bottom: 0.25rem; }
+        .card-subtitle { font-size: 0.875rem; color: #6b7280; margin-top: 0.25rem; transition: color 0.3s ease; line-height: 1.4; }
 
         /* Estilo Checkbox Personalizado */
         .custom-checkbox {
-            appearance: none; /* Ocultar checkbox nativo */
-            width: 22px;
-            height: 22px;
-            border: 2px solid #c084fc; /* Borde púrpura */
-            border-radius: 5px;
+            appearance: none;
+            width: 24px;
+            height: 24px;
+            border: 2px solid #d8b4fe;
+            border-radius: 6px;
             display: inline-block;
-            position: absolute; /* Posicionar absolutamente */
-            top: 1.25rem; /* Alinear con padding superior */
-            right: 1.25rem; /* Alinear con padding derecho */
+            position: absolute;
+            top: 1.25rem;
+            right: 1.25rem;
             cursor: pointer;
-            transition: background-color 0.2s ease, border-color 0.2s ease;
+            transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease; /* Añadida transform */
         }
         .custom-checkbox:checked {
-            background-color: #a855f7; /* Fondo púrpura oscuro al marcar */
+            background-color: #a855f7;
             border-color: #a855f7;
+            animation: checkPop 0.3s ease; /* Animación al marcar */
         }
-        /* Pseudo-elemento para el checkmark (usando Font Awesome) */
         .custom-checkbox:checked::before {
-            content: '\f00c'; /* Código del icono de check de Font Awesome */
+            content: '\f00c';
             font-family: 'Font Awesome 6 Free';
             font-weight: 900;
             color: white;
@@ -107,27 +155,38 @@
         .completed .card-title,
         .completed .card-subtitle {
             text-decoration: line-through;
-            color: #a1a1aa; /* Gris más claro */
+            text-decoration-color: #a855f7;
+            color: #a1a1aa;
+            opacity: 0.7;
         }
         .completed {
-             background-color: #f5f3ff; /* Fondo ligeramente diferente */
+             background-color: #f5f3ff;
+             border-color: #c4b5fd;
+             transform: scale(0.98); /* Encoger ligeramente al completar */
+             box-shadow: none; /* Quitar sombra al completar */
         }
+        .completed:hover { /* Ajustar hover para completados */
+             transform: scale(0.99);
+             box-shadow: 0 2px 5px rgba(168, 85, 247, 0.1);
+        }
+
 
         /* Estilo Barra de Progreso */
         .progress-bar-container {
-            background-color: #e9d5ff; /* Fondo lila claro */
-            border-radius: 9999px; /* Totalmente redondeado */
+            background-color: #e9d5ff;
+            border-radius: 9999px;
             overflow: hidden;
-            height: 1.5rem; /* Altura de la barra */
+            height: 1.5rem;
             width: 100%;
-            margin-bottom: 0.5rem; /* Espacio debajo */
+            margin-bottom: 0.5rem;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
         }
         .progress-bar {
-            background-color: #a855f7; /* Púrpura oscuro */
+            background: linear-gradient(90deg, #a855f7, #c084fc);
             height: 100%;
-            width: 0%; /* Inicia en 0 */
+            width: 0%;
             border-radius: 9999px;
-            transition: width 0.5s ease-in-out; /* Transición suave */
+            transition: width 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -135,18 +194,65 @@
             font-size: 0.8rem;
             font-weight: 600;
         }
+        /* Estilos inputs y botón calculadora */
+        input[type="number"].form-input {
+             width: 100%;
+             padding: 0.65rem 0.75rem;
+             border: 1px solid #d1d5db;
+             border-radius: 0.5rem;
+             transition: border-color 0.2s ease, box-shadow 0.2s ease;
+             font-size: 0.9rem;
+        }
+         input[type="number"].form-input:focus {
+             outline: none;
+             border-color: #a855f7;
+             box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.2);
+         }
+         .calculate-button {
+             background-color: #8b5cf6;
+             color: white;
+             font-weight: 600;
+             padding: 0.75rem 1.5rem;
+             border-radius: 0.5rem;
+             transition: background-color 0.3s ease, transform 0.2s ease;
+             box-shadow: 0 4px 6px rgba(139, 92, 246, 0.2);
+         }
+         .calculate-button:hover {
+             background-color: #7c3aed;
+             transform: translateY(-2px);
+             box-shadow: 0 6px 10px rgba(139, 92, 246, 0.3);
+         }
+         .calculate-button:focus {
+              outline: none;
+              box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.3);
+         }
+         /* Resultado Calculadora */
+         #resultado_penalizacion {
+             min-height: 65px;
+             display: flex;
+             align-items: center;
+             justify-content: center;
+             border-radius: 0.5rem;
+             font-size: 0.95rem;
+             transition: background-color 0.3s ease, border-color 0.3s ease;
+         }
+         #resultado_penalizacion span { transition: color 0.3s ease; }
+         /* Estilos específicos para resultados */
+         .result-default { background-color: #f3e8ff; border: 1px solid #e9d5ff; color: #6b21a8; }
+         .result-success { background-color: #dcfce7; border: 1px solid #86efac; color: #166534; }
+         .result-error { background-color: #fee2e2; border: 1px solid #fca5a5; color: #991b1b; }
+
     </style>
 </head>
 <body class="min-h-screen p-4 md:p-8">
 
-    <div class="max-w-6xl mx-auto bg-white rounded-2xl shadow-xl overflow-hidden border border-purple-100">
+    <div class="main-container">
 
         <header class="p-6 md:p-10 text-center relative">
-            <div class="gerbera-placeholder">
-                <i class="fas fa-spa fa-3x text-purple-400" aria-hidden="true"></i>
-                <span class="ml-3">[Imagen de Gerberas Púrpuras]</span>
+            <div class="header-icon-placeholder">
+                <i class="fas fa-heart-pulse fa-3x" aria-hidden="true"></i>
             </div>
-            <h1 class="text-3xl md:text-4xl font-bold text-purple-800 mb-2">Nuestro Reto de 30 Días</h1>
+            <h1 class="text-3xl md:text-4xl font-bold text-purple-800 mb-2 tracking-tight">Nuestro Reto de 30 Días</h1>
             <p class="text-lg text-purple-600">30 días, 30 citas, infinitos recuerdos.</p>
             <hr class="mt-6 border-purple-200 w-1/4 mx-auto">
         </header>
@@ -156,172 +262,211 @@
              <div class="progress-bar-container">
                  <div id="progressBar" class="progress-bar">0%</div>
              </div>
-             <p id="progressText" class="text-center text-sm text-purple-600 mb-6">Completa las actividades para ver tu avance.</p>
+             <p id="progressText" class="text-center text-sm text-purple-600 mb-8">Completa las actividades para ver tu avance.</p>
         </section>
 
         <main class="p-6 md:p-10 pt-0">
 
             <section id="actividades" class="mb-12">
                 <h2 class="text-2xl font-semibold text-purple-700 mb-8 text-center">Calendario de Aventuras</h2>
-                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
 
                     <div class="day-card" data-day="1">
                         <input type="checkbox" class="custom-checkbox" id="day-1-check">
                         <div class="card-content"> <span class="card-day">DÍA 1</span> <p class="card-title">Noche de cine en casa</p> </div>
-                        <p class="card-subtitle">¡Con mantita y snacks!</p>
+                        <p class="card-subtitle">¡Palomitas, mantita y nuestra peli!</p>
                     </div>
                     <div class="day-card" data-day="2">
                          <input type="checkbox" class="custom-checkbox" id="day-2-check">
                          <div class="card-content"> <span class="card-day">DÍA 2</span> <p class="card-title">Cena romántica casera</p> </div>
-                         <p class="card-subtitle">Cocinamos nuestro plato favorito.</p>
+                         <p class="card-subtitle">Cocinamos juntos nuestro plato estrella.</p>
                     </div>
                     <div class="day-card" data-day="3">
                         <input type="checkbox" class="custom-checkbox" id="day-3-check">
-                        <div class="card-content"> <span class="card-day">DÍA 3</span> <p class="card-title">Visita al zoológico o acuario</p> </div>
-                        <p class="card-subtitle">Un día entre animales.</p>
+                        <div class="card-content"> <span class="card-day">DÍA 3</span> <p class="card-title">Visita al Parque de las Leyendas</p> </div>
+                        <p class="card-subtitle">Un día entre animales y cultura local.</p>
                     </div>
                      <div class="day-card" data-day="4">
                         <input type="checkbox" class="custom-checkbox" id="day-4-check">
                         <div class="card-content"> <span class="card-day">DÍA 4</span> <p class="card-title">Noche de pintura y vino</p> </div>
-                        <p class="card-subtitle">¡A sacar el artista!</p>
+                        <p class="card-subtitle">¡Liberando al artista que llevamos dentro!</p>
                     </div>
                      <div class="day-card" data-day="5">
                          <input type="checkbox" class="custom-checkbox" id="day-5-check">
-                         <div class="card-content"> <span class="card-day">DÍA 5</span> <p class="card-title">Visitar un museo</p> </div>
-                        <p class="card-subtitle">Cultura y descubrimiento.</p>
+                         <div class="card-content"> <span class="card-day">DÍA 5</span> <p class="card-title">Visitar un museo (MALI, Larco)</p> </div>
+                        <p class="card-subtitle">Inmersión en cultura e historia.</p>
                     </div>
                      <div class="day-card" data-day="6">
                          <input type="checkbox" class="custom-checkbox" id="day-6-check">
-                         <div class="card-content"> <span class="card-day">DÍA 6</span> <p class="card-title">Concierto de mutuo acuerdo</p> </div>
-                        <p class="card-subtitle">¡Música para el alma!</p>
+                         <div class="card-content"> <span class="card-day">DÍA 6</span> <p class="card-title">Concierto o show en vivo</p> </div>
+                        <p class="card-subtitle">¡Música o comedia para vibrar juntos!</p>
                     </div>
                      <div class="day-card" data-day="7">
                          <input type="checkbox" class="custom-checkbox" id="day-7-check">
                          <div class="card-content"> <span class="card-day">DÍA 7</span> <p class="card-title">Noche de Comida Japonesa</p> </div>
-                        <p class="card-subtitle">Sushi, ramen, ¡lo que más nos guste!</p>
+                        <p class="card-subtitle">Sushi, ramen... ¡nuestro antojo oriental!</p>
                     </div>
                      <div class="day-card" data-day="8">
                          <input type="checkbox" class="custom-checkbox" id="day-8-check">
                          <div class="card-content"> <span class="card-day">DÍA 8</span> <p class="card-title">Día de Juegos Mecánicos</p> </div>
-                        <p class="card-subtitle">¡Adrenalina y diversión!</p>
+                        <p class="card-subtitle">¡Adrenalina y risas aseguradas!</p>
                     </div>
                     <div class="day-card" data-day="9">
                          <input type="checkbox" class="custom-checkbox" id="day-9-check">
-                         <div class="card-content"> <span class="card-day">DÍA 9</span> <p class="card-title">Picnic en el parque</p> </div>
-                         <p class="card-subtitle">Sol, comida y buena compañía.</p>
+                         <div class="card-content"> <span class="card-day">DÍA 9</span> <p class="card-title">Picnic en El Olivar</p> </div>
+                         <p class="card-subtitle">Relax bajo los árboles centenarios.</p>
                     </div>
                     <div class="day-card" data-day="10">
                          <input type="checkbox" class="custom-checkbox" id="day-10-check">
                          <div class="card-content"> <span class="card-day">DÍA 10</span> <p class="card-title">Noche de Juegos de Mesa</p> </div>
-                         <p class="card-subtitle">¡Que gane el mejor!</p>
+                         <p class="card-subtitle">¡Competencia amistosa y estrategia!</p>
                     </div>
                     <div class="day-card" data-day="11">
                          <input type="checkbox" class="custom-checkbox" id="day-11-check">
-                         <div class="card-content"> <span class="card-day">DÍA 11</span> <p class="card-title">Cafetería con encanto</p> </div>
-                         <p class="card-subtitle">Un buen café y conversación.</p>
+                         <div class="card-content"> <span class="card-day">DÍA 11</span> <p class="card-title">Descubrir una cafetería</p> </div>
+                         <p class="card-subtitle">Encontrar un nuevo rincón acogedor.</p>
                     </div>
                     <div class="day-card" data-day="12">
                          <input type="checkbox" class="custom-checkbox" id="day-12-check">
                          <div class="card-content"> <span class="card-day">DÍA 12</span> <p class="card-title">Atardecer en la playa</p> </div>
-                         <p class="card-subtitle">Vistas mágicas en la Costa Verde.</p>
+                         <p class="card-subtitle">Magia en la Costa Verde.</p>
                     </div>
                     <div class="day-card" data-day="13">
                          <input type="checkbox" class="custom-checkbox" id="day-13-check">
-                         <div class="card-content"> <span class="card-day">DÍA 13</span> <p class="card-title">Pijamada</p> </div>
-                         <p class="card-subtitle">Películas, snacks y charlas.</p>
+                         <div class="card-content"> <span class="card-day">DÍA 13</span> <p class="card-title">Pijamada temática</p> </div>
+                         <p class="card-subtitle">Maratón de pelis y charlas nocturnas.</p>
                     </div>
                      <div class="day-card" data-day="14">
                          <input type="checkbox" class="custom-checkbox" id="day-14-check">
                          <div class="card-content"> <span class="card-day">DÍA 14</span> <p class="card-title">Clase de Cocina Peruana</p> </div>
-                         <p class="card-subtitle">¡Aprender y saborear juntos!</p>
+                         <p class="card-subtitle">¡Manos a la obra y a saborear!</p>
                     </div>
                      <div class="day-card" data-day="15">
                          <input type="checkbox" class="custom-checkbox" id="day-15-check">
                          <div class="card-content"> <span class="card-day">DÍA 15</span> <p class="card-title">Paseo por Barranco</p> </div>
-                         <p class="card-subtitle">Arte, cultura y romance.</p>
+                         <p class="card-subtitle">Puente de los Suspiros y arte bohemio.</p>
                     </div>
                      <div class="day-card" data-day="16">
                          <input type="checkbox" class="custom-checkbox" id="day-16-check">
-                         <div class="card-content"> <span class="card-day">DÍA 16</span> <p class="card-title">Tarde de Voluntariado</p> </div>
-                         <p class="card-subtitle">Haciendo el bien juntos.</p>
+                         <div class="card-content"> <span class="card-day">DÍA 16</span> <p class="card-title">Noche de Escape Room</p> </div>
+                         <p class="card-subtitle">¡Resolver misterios contra reloj!</p>
                     </div>
-
                     <div class="day-card" data-day="17">
                          <input type="checkbox" class="custom-checkbox" id="day-17-check">
-                         <div class="card-content"> <span class="card-day">DÍA 17</span> <p class="card-title">Noche de Karaoke Privado</p> </div>
-                         <p class="card-subtitle">¡Afinar la voz y divertirse!</p>
+                         <div class="card-content"> <span class="card-day">DÍA 17</span> <p class="card-title">Noche de Karaoke</p> </div>
+                         <p class="card-subtitle">¡Afinar (o no) la voz y divertirse!</p>
                     </div>
-
-
-                    <div class="day-card placeholder-card">
-                         <div class="card-content">
-                            <span class="card-day">DÍA 18</span>
-                            <p class="placeholder-text">Plan por definir...</p>
-                         </div>
+                    <div class="day-card" data-day="18">
+                        <input type="checkbox" class="custom-checkbox" id="day-18-check">
+                        <div class="card-content"> <span class="card-day">DÍA 18</span> <p class="card-title">Circuito Mágico del Agua</p> </div>
+                        <p class="card-subtitle">Espectáculo de luces y fuentes.</p>
                     </div>
-                     <div class="day-card placeholder-card">
-                          <div class="card-content">
-                            <span class="card-day">DÍA 19</span>
-                            <p class="placeholder-text">¡Sorpresa!</p>
-                          </div>
+                    <div class="day-card" data-day="19">
+                        <input type="checkbox" class="custom-checkbox" id="day-19-check">
+                        <div class="card-content"> <span class="card-day">DÍA 19</span> <p class="card-title">Tarde de Bici por el Malecón</p> </div>
+                        <p class="card-subtitle">Ejercicio con vista al mar.</p>
                     </div>
-                     <div class="day-card placeholder-card">
-                          <div class="card-content">
-                            <span class="card-day">DÍA 20 - 29</span>
-                            <p class="placeholder-text">Más aventuras...</p>
-                          </div>
+                    <div class="day-card" data-day="20">
+                        <input type="checkbox" class="custom-checkbox" id="day-20-check">
+                        <div class="card-content"> <span class="card-day">DÍA 20</span> <p class="card-title">Noche de Estrellas</p> </div>
+                        <p class="card-subtitle">Visita al Planetario o cielo abierto.</p>
+                    </div>
+                    <div class="day-card" data-day="21">
+                        <input type="checkbox" class="custom-checkbox" id="day-21-check">
+                        <div class="card-content"> <span class="card-day">DÍA 21</span> <p class="card-title">Cata de Pisco o Vino</p> </div>
+                        <p class="card-subtitle">Descubriendo nuevos aromas y sabores.</p>
+                    </div>
+                    <div class="day-card" data-day="22">
+                        <input type="checkbox" class="custom-checkbox" id="day-22-check">
+                        <div class="card-content"> <span class="card-day">DÍA 22</span> <p class="card-title">Día de Spa en Casa</p> </div>
+                        <p class="card-subtitle">Mascarillas, masajes y relax total.</p>
+                    </div>
+                    <div class="day-card" data-day="23">
+                        <input type="checkbox" class="custom-checkbox" id="day-23-check">
+                        <div class="card-content"> <span class="card-day">DÍA 23</span> <p class="card-title">Explorar un Mercado Local</p> </div>
+                        <p class="card-subtitle">Colores y sabores de Surquillo.</p>
+                    </div>
+                    <div class="day-card" data-day="24">
+                        <input type="checkbox" class="custom-checkbox" id="day-24-check">
+                        <div class="card-content"> <span class="card-day">DÍA 24</span> <p class="card-title">Clase de Baile Juntos</p> </div>
+                        <p class="card-subtitle">Salsa, bachata... ¡a mover el cuerpo!</p>
+                    </div>
+                     <div class="day-card" data-day="25">
+                        <input type="checkbox" class="custom-checkbox" id="day-25-check">
+                        <div class="card-content"> <span class="card-day">DÍA 25</span> <p class="card-title">Visitar las Catacumbas</p> </div>
+                        <p class="card-subtitle">Un toque de misterio bajo Lima.</p>
+                    </div>
+                    <div class="day-card" data-day="26">
+                        <input type="checkbox" class="custom-checkbox" id="day-26-check">
+                        <div class="card-content"> <span class="card-day">DÍA 26</span> <p class="card-title">Taller de Cerámica o Artesanía</p> </div>
+                        <p class="card-subtitle">Creando recuerdos con las manos.</p>
+                    </div>
+                    <div class="day-card" data-day="27">
+                        <input type="checkbox" class="custom-checkbox" id="day-27-check">
+                        <div class="card-content"> <span class="card-day">DÍA 27</span> <p class="card-title">Noche de Teatro o Stand-up</p> </div>
+                        <p class="card-subtitle">Cultura, risas o drama en vivo.</p>
+                    </div>
+                    <div class="day-card" data-day="28">
+                        <input type="checkbox" class="custom-checkbox" id="day-28-check">
+                        <div class="card-content"> <span class="card-day">DÍA 28</span> <p class="card-title">Preparar Postres Juntos</p> </div>
+                        <p class="card-subtitle">El dulce sabor del trabajo en equipo.</p>
+                    </div>
+                    <div class="day-card" data-day="29">
+                        <input type="checkbox" class="custom-checkbox" id="day-29-check">
+                        <div class="card-content"> <span class="card-day">DÍA 29</span> <p class="card-title">Recrear nuestra Primera Cita</p> </div>
+                        <p class="card-subtitle">Un viaje nostálgico y romántico.</p>
                     </div>
 
                     <div class="day-card final-day-card" data-day="30">
                         <input type="checkbox" class="custom-checkbox" id="day-30-check">
                         <div class="card-content">
                             <span class="card-day">DÍA 30 - GRAN FINAL</span>
-                            <p class="card-title">Cena especial</p>
+                            <p class="card-title">Cena de Celebración</p>
                         </div>
-                        <p class="card-subtitle">Restaurante Museo Larco</p>
+                        <p class="card-subtitle">¡Lo logramos! Brindis especial.</p>
                     </div>
                 </div>
             </section>
 
-            <section id="penalizacion" class="bg-purple-50 p-6 md:p-8 rounded-lg border border-purple-200">
-                <h2 class="text-2xl font-semibold text-purple-700 mb-6 text-center">Las Reglas del Cariño</h2>
-                 <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200 max-w-lg mx-auto">
-                    <h3 class="text-lg font-semibold text-purple-800 mb-4 text-center">Calculadora de Penalización</h3>
-                    <div class="space-y-4 mb-6">
-                        <div>
-                            <label for="monto_x" class="block text-sm font-medium text-gray-700 mb-1">Monto base por día (S/):</label>
-                            <input type="number" id="monto_x" name="monto_x" placeholder="Ej: 50" class="w-full p-2 border border-gray-300 rounded-md focus:ring-purple-500 focus:border-purple-500">
-                        </div>
-                        <div>
-                            <label for="porcentaje_y" class="block text-sm font-medium text-gray-700 mb-1">Porcentaje adicional (%):</label>
-                            <input type="number" id="porcentaje_y" name="porcentaje_y" placeholder="Ej: 10" class="w-full p-2 border border-gray-300 rounded-md focus:ring-purple-500 focus:border-purple-500">
-                        </div>
-                        <div>
-                            <label for="dia_retiro" class="block text-sm font-medium text-gray-700 mb-1">Día en que se retira (1-29):</label>
-                            <input type="number" id="dia_retiro" name="dia_retiro" min="1" max="29" placeholder="Ej: 15" class="w-full p-2 border border-gray-300 rounded-md focus:ring-purple-500 focus:border-purple-500">
-                        </div>
-                    </div>
-                    <div class="text-center mb-4">
-                         <button id="calculateBtnPenalty" class="bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 px-6 rounded-md transition duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2">
-                            Calcular Penalización
-                        </button>
-                    </div>
-                    <div id="resultado_penalizacion" class="mt-6 p-4 bg-purple-100 border border-purple-300 rounded-md text-center min-h-[60px] flex items-center justify-center">
-                        <span class="text-purple-800 font-medium">El resultado aparecerá aquí.</span>
-                    </div>
-                     <p class="mt-4 text-xs text-gray-500 italic text-center">
-                        Fórmula: (Días Faltantes * Monto X) + (Y% de [30 * Monto X])
-                    </p>
-                </div>
-                 <p class="mt-6 text-center text-purple-600 font-medium">
-                    ¡Pero crucemos los dedos para llegar juntos al día 30! <i class="fas fa-heart text-purple-500"></i>
-                 </p>
+            <section id="penalizacion" class="bg-purple-50 p-6 md:p-8 rounded-lg border border-purple-200 mt-12">
+                 <h2 class="text-2xl font-semibold text-purple-700 mb-6 text-center">Las Reglas del Cariño</h2>
+                  <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200 max-w-lg mx-auto">
+                      <h3 class="text-lg font-semibold text-purple-800 mb-5 text-center">Calculadora de Penalización</h3>
+                      <div class="space-y-4 mb-6">
+                          <div>
+                              <label for="monto_x" class="block text-sm font-medium text-gray-700 mb-1">Monto base por día (S/):</label>
+                              <input type="number" id="monto_x" name="monto_x" placeholder="Ej: 50" class="form-input">
+                          </div>
+                          <div>
+                              <label for="porcentaje_y" class="block text-sm font-medium text-gray-700 mb-1">Porcentaje adicional (%):</label>
+                              <input type="number" id="porcentaje_y" name="porcentaje_y" placeholder="Ej: 10" class="form-input">
+                          </div>
+                          <div>
+                              <label for="dia_retiro" class="block text-sm font-medium text-gray-700 mb-1">Día en que se retira (1-29):</label>
+                              <input type="number" id="dia_retiro" name="dia_retiro" min="1" max="29" placeholder="Ej: 15" class="form-input">
+                          </div>
+                      </div>
+                      <div class="text-center mb-4">
+                           <button id="calculateBtnPenalty" class="calculate-button">
+                              <i class="fas fa-calculator mr-2"></i> Calcular Penalización
+                           </button>
+                      </div>
+                      <div id="resultado_penalizacion" class="mt-6 p-4 result-default">
+                           <span class="font-medium">El resultado aparecerá aquí.</span>
+                      </div>
+                       <p class="mt-4 text-xs text-gray-500 italic text-center">
+                           Fórmula: (Días Faltantes * Monto X) + (Y% de [30 * Monto X])
+                       </p>
+                  </div>
+                  <p class="mt-6 text-center text-purple-600 font-medium">
+                      ¡Pero crucemos los dedos para llegar juntos al día 30! <i class="fas fa-heart text-purple-500 animate-pulse"></i>
+                  </p>
             </section>
 
         </main>
 
-        <footer class="text-center p-6 text-sm text-purple-500 bg-purple-50 border-t border-purple-100">
-            Hecho con cariño para nuestra aventura de 30 días.
+        <footer class="text-center p-6 text-sm text-purple-500 bg-purple-50 border-t border-purple-100 mt-8">
+            Hecho con <i class="fas fa-heart text-red-500"></i> para nuestra aventura de 30 días.
         </footer>
 
     </div>
@@ -329,11 +474,11 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             // --- Variables y Selectores ---
-            const challengeStateKey = 'challengeProgress_v1'; // Clave para localStorage
-            const dayCards = document.querySelectorAll('.day-card[data-day]'); // Tarjetas con data-day (actividades reales)
+            const challengeStateKey = 'challengeProgress_v2'; // Mantener clave si no hay cambios estructurales grandes
+            const dayCards = document.querySelectorAll('.day-card[data-day]');
             const progressBar = document.getElementById('progressBar');
             const progressText = document.getElementById('progressText');
-            const totalActivities = dayCards.length; // Número total de actividades con checkbox (SE ACTUALIZA AUTOMATICAMENTE)
+            const totalActivities = dayCards.length; // Sigue siendo 30
 
             // Selectores para la calculadora de penalización
             const montoXInput = document.getElementById('monto_x');
@@ -351,6 +496,10 @@
                 if (savedState) {
                     try {
                         state = JSON.parse(savedState);
+                        // Asegurarse de que el estado sea un objeto
+                        if (typeof state !== 'object' || state === null) {
+                             state = {};
+                        }
                     } catch (e) {
                         console.error("Error parsing saved state:", e);
                         state = {}; // Resetea si hay error
@@ -362,9 +511,14 @@
             // Guarda el estado actual en localStorage
             function saveState(state) {
                  try {
-                    localStorage.setItem(challengeStateKey, JSON.stringify(state));
+                     // Asegurarse de guardar un objeto válido
+                     if (typeof state === 'object' && state !== null) {
+                        localStorage.setItem(challengeStateKey, JSON.stringify(state));
+                     } else {
+                         console.error("Attempted to save invalid state:", state);
+                     }
                  } catch (e) {
-                    console.error("Error saving state:", e);
+                     console.error("Error saving state:", e);
                  }
             }
 
@@ -376,9 +530,11 @@
                     const checkbox = card.querySelector('.custom-checkbox');
                     if (!checkbox) return;
 
-                    const isCompleted = state[day] === true;
+                    // Verificar si state es un objeto antes de acceder a state[day]
+                    const isCompleted = (typeof state === 'object' && state !== null && state[day] === true);
                     checkbox.checked = isCompleted;
 
+                    // Aplicar/Quitar clase 'completed' para estilos CSS
                     if (isCompleted) {
                         card.classList.add('completed');
                         completedCount++;
@@ -390,17 +546,20 @@
                 // Actualizar barra y texto de progreso
                 const percentage = totalActivities > 0 ? Math.round((completedCount / totalActivities) * 100) : 0;
                 if (progressBar) {
-                   progressBar.style.width = `${percentage}%`;
-                   progressBar.textContent = `${percentage}%`;
+                    // Forzar reflujo para reiniciar transición si el valor es el mismo (ej. 0 -> 0)
+                    progressBar.style.width = `${percentage}%`;
+                    progressBar.textContent = `${percentage}%`;
+                    void progressBar.offsetWidth; // Truco para forzar reflujo
                 }
                  if (progressText) {
-                    if (completedCount === 0) {
+                     if (completedCount === 0) {
                          progressText.textContent = "¡Empiecen la aventura marcando la primera actividad!";
-                    } else if (completedCount === totalActivities) {
+                     } else if (completedCount === totalActivities) {
                          progressText.textContent = `¡Felicidades! Han completado el ${percentage}% del reto. ¡Lo lograron! 🎉`;
-                    } else {
+                         // Podrías añadir aquí una clase al body o a un contenedor para activar confeti CSS
+                     } else {
                          progressText.textContent = `Han completado ${completedCount} de ${totalActivities} actividades (${percentage}%). ¡Sigan así!`;
-                    }
+                     }
                  }
             }
 
@@ -412,10 +571,18 @@
                 const isChecked = event.target.checked;
 
                 const currentState = loadState();
+                // Asegurarse de que currentState es un objeto
+                 if (typeof currentState !== 'object' || currentState === null) {
+                      console.error("Loaded state is not an object:", currentState);
+                      // Podrías inicializarlo como objeto vacío si prefieres continuar
+                      // currentState = {};
+                      return; // O detener la ejecución si el estado es inválido
+                 }
+
                 currentState[day] = isChecked;
 
                 saveState(currentState);
-                updateUI(currentState);
+                updateUI(currentState); // Actualiza toda la UI para reflejar el cambio
             }
 
              // Función para calcular la penalización
@@ -424,38 +591,46 @@
                 const porcentajeY = parseFloat(porcentajeYInput.value);
                 const diaRetiro = parseInt(diaRetiroInput.value, 10);
 
+                // Limpiar estilos y contenido previo
+                resultadoDivPenalty.className = 'mt-6 p-4 flex items-center justify-center rounded-md text-center min-h-[65px] transition duration-300 ease-in-out'; // Clases base
                 resultadoDivPenalty.innerHTML = '';
-                resultadoDivPenalty.classList.remove('bg-red-100', 'border-red-300', 'text-red-800', 'bg-green-100', 'border-green-300', 'text-green-800');
-                resultadoDivPenalty.classList.add('bg-purple-100', 'border-purple-300');
+
+                let isValid = true;
+                let errorMessage = '';
 
                 if (isNaN(montoX) || montoX <= 0) {
-                    resultadoDivPenalty.innerHTML = '<span class="text-red-700 font-medium">Ingresa un Monto X válido (> 0).</span>';
-                    resultadoDivPenalty.classList.add('bg-red-100', 'border-red-300'); return;
-                }
-                if (isNaN(porcentajeY) || porcentajeY < 0) {
-                     resultadoDivPenalty.innerHTML = '<span class="text-red-700 font-medium">Ingresa un Porcentaje Y válido (>= 0).</span>';
-                     resultadoDivPenalty.classList.add('bg-red-100', 'border-red-300'); return;
-                }
-                 if (isNaN(diaRetiro) || diaRetiro < 1 || diaRetiro > 29) {
-                     resultadoDivPenalty.innerHTML = '<span class="text-red-700 font-medium">Ingresa un Día de Retiro válido (1-29).</span>';
-                     resultadoDivPenalty.classList.add('bg-red-100', 'border-red-300'); return;
+                    errorMessage = 'Ingresa un Monto X válido (> 0).';
+                    isValid = false;
+                } else if (isNaN(porcentajeY) || porcentajeY < 0) {
+                     errorMessage = 'Ingresa un Porcentaje Y válido (>= 0).';
+                     isValid = false;
+                } else if (isNaN(diaRetiro) || diaRetiro < 1 || diaRetiro > 29) {
+                     errorMessage = 'Ingresa un Día de Retiro válido (1-29).';
+                     isValid = false;
                 }
 
+                if (!isValid) {
+                    resultadoDivPenalty.classList.add('result-error'); // Estilo de error
+                    resultadoDivPenalty.innerHTML = `<span class="font-medium">${errorMessage}</span>`;
+                    return;
+                }
+
+                // Si es válido, calcular y mostrar
                 const diasFaltantes = 30 - diaRetiro;
                 const penalizacionBase = diasFaltantes * montoX;
                 const penalizacionPorcentual = (porcentajeY / 100) * (30 * montoX);
                 const penalizacionTotal = penalizacionBase + penalizacionPorcentual;
 
-                resultadoDivPenalty.innerHTML = `<span class="text-purple-800 font-bold text-lg">Penalización Total: S/ ${penalizacionTotal.toFixed(2)}</span>`;
-                resultadoDivPenalty.classList.remove('bg-purple-100', 'border-purple-300');
-                resultadoDivPenalty.classList.add('bg-green-100', 'border-green-300', 'text-green-800');
+                resultadoDivPenalty.classList.add('result-success'); // Estilo de éxito
+                resultadoDivPenalty.innerHTML = `<span class="font-bold text-lg">Penalización Total: S/ ${penalizacionTotal.toFixed(2)}</span>`;
             }
 
 
             // --- Inicialización ---
             const initialState = loadState();
-            updateUI(initialState);
+            updateUI(initialState); // Carga el estado inicial al cargar la página
 
+            // Añadir listeners a los checkboxes
             dayCards.forEach(card => {
                 const checkbox = card.querySelector('.custom-checkbox');
                 if (checkbox) {
@@ -463,11 +638,24 @@
                 }
             });
 
+            // Añadir listener al botón de calcular penalización
             if (calculateBtnPenalty) {
                 calculateBtnPenalty.addEventListener('click', calcularPenalizacion);
             } else {
                 console.error("El botón de cálculo de penalización no se encontró.");
             }
+
+             // Pequeño ajuste para asegurar que las animaciones de entrada se vean bien
+             // al cargar la página si ya hay elementos marcados.
+             setTimeout(() => {
+                dayCards.forEach(card => {
+                    // Forzar la visibilidad si la animación ya terminó (por si acaso)
+                    if (card.style.opacity === '0') {
+                         card.style.opacity = '1';
+                    }
+                });
+             }, 600); // Un poco más del tiempo de la animación más larga
+
 
         });
     </script>
@@ -475,5 +663,3 @@
 </body>
 </html>
 
-</body>
-</html>
