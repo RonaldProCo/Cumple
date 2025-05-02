@@ -3,244 +3,288 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nuestro Reto de 30 Días - Progreso Animado</title>
+    <title>Nuestro Reto... Roto</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
     <style>
-        /* Estilos base y fuente */
+        /* Estilos base y fuente - Tema Oscuro/Roto */
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #f3e8ff; /* Fondo lila muy pálido */
-            color: #374151;
+            background-color: #111827; /* Fondo aún más oscuro */
+            color: #9ca3af; /* Texto gris */
+            overflow-x: hidden; /* Prevenir scroll horizontal por rotación */
         }
-        /* Contenedor principal */
+        /* Contenedor principal - Más roto */
         .main-container {
             max-width: 7xl;
-            margin-left: auto;
-            margin-right: auto;
-            background-color: white;
-            border-radius: 1rem;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+            margin: 2rem auto; /* Más margen para ver el fondo */
+            background-color: #1f2937; /* Gris oscuro */
+            border-radius: 0.25rem; /* Esquinas más agudas */
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.4); /* Sombra más pronunciada */
             overflow: hidden;
-            border: 1px solid #e9d5ff;
+            border: 1px solid #4b5563; /* Borde gris */
+            position: relative; /* Para pseudo-elementos */
+            transform: rotate(-0.5deg); /* Ligera inclinación */
+            filter: grayscale(10%); /* Ligero gris general */
         }
+
+        /* Simulación de múltiples grietas */
+        .main-container::before,
+        .main-container::after,
+        body::before, /* Grietas también en el fondo */
+        body::after {
+            content: '';
+            position: absolute;
+            background-color: rgba(75, 85, 99, 0.6); /* Color de la grieta semi-transparente */
+            z-index: 10; /* Por encima del contenido */
+            box-shadow: 0 0 3px 1px rgba(0,0,0,0.3);
+            pointer-events: none; /* Para no interferir con clicks */
+        }
+        /* Grieta 1 (Contenedor) */
+        .main-container::before {
+            width: 1px;
+            height: 60%;
+            top: 5%;
+            left: 15%;
+            transform: rotate(25deg);
+        }
+        /* Grieta 2 (Contenedor) */
+         .main-container::after {
+            width: 1px;
+            height: 55%;
+            bottom: 10%;
+            right: 20%;
+            transform: rotate(-18deg);
+        }
+        /* Grieta 3 (Body) */
+        body::before {
+            width: 1px;
+            height: 40%;
+            top: 50%;
+            left: 5%;
+            transform: rotate(-30deg) translateY(-50%);
+        }
+        /* Grieta 4 (Body) */
+        body::after {
+            width: 1px;
+            height: 35%;
+            top: 20%;
+            right: 8%;
+            transform: rotate(40deg);
+        }
+
 
         /* --- ANIMACIONES --- */
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+            from { opacity: 0; transform: translateY(5px) rotate(-1deg); } /* Añadir rotación */
+            to { opacity: 1; transform: translateY(0) rotate(0); }
         }
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-        }
-        @keyframes checkPop {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.2); }
-            100% { transform: scale(1); }
-        }
-        @keyframes finalGlow {
-             0%, 100% { box-shadow: 0 0 15px 5px rgba(255, 255, 255, 0.3); }
-             50% { box-shadow: 0 0 25px 10px rgba(255, 255, 255, 0.5); }
+        @keyframes crackle { /* Animación sutil de "parpadeo" */
+            0%, 100% { opacity: 1; filter: brightness(1); }
+            50% { opacity: 0.9; filter: brightness(0.95); }
         }
 
-        /* Aplicar animación de entrada a las tarjetas */
+
+        /* Tarjetas de día - Estilo destruido */
         .day-card {
-            /* ... (estilos existentes) ... */
-            background-color: white;
-            border: 1px solid #e9d5ff;
-            border-radius: 0.75rem;
-            padding: 1.25rem;
-            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, border-color 0.3s ease; /* Añadida border-color */
-            box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+            background-color: #374151;
+            border: 1px dashed #4b5563;
+            border-radius: 0.1rem; /* Casi sin redondear */
+            padding: 1rem; /* Un poco menos padding */
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, filter 0.3s ease;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.3);
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            min-height: 150px;
+            min-height: 140px; /* Ligeramente más pequeñas */
             position: relative;
-            opacity: 0; /* Inicia invisible */
-            animation: fadeIn 0.5s ease-out forwards; /* Aplica fadeIn */
+            opacity: 0.7; /* Más transparente */
+            filter: grayscale(60%); /* Más gris */
+            animation: fadeIn 0.6s ease-out forwards, crackle 4s linear infinite alternate; /* Fade y parpadeo */
+            transform: rotate(0.2deg); /* Ligera inclinación individual */
         }
-        /* Staggered animation delay (opcional pero agradable) */
-        .grid > .day-card:nth-child(1) { animation-delay: 0.05s; }
-        .grid > .day-card:nth-child(2) { animation-delay: 0.1s; }
-        .grid > .day-card:nth-child(3) { animation-delay: 0.15s; }
-        .grid > .day-card:nth-child(4) { animation-delay: 0.2s; }
-        .grid > .day-card:nth-child(5) { animation-delay: 0.25s; }
-        /* ... (continuar para más tarjetas si se desea un efecto más largo) */
+        /* Retraso animación */
+        .grid > .day-card:nth-child(odd) { animation-delay: 0.1s; transform: rotate(-0.3deg); }
+        .grid > .day-card:nth-child(even) { animation-delay: 0.2s; transform: rotate(0.4deg); }
+        /* ... (se puede seguir alternando) */
+
 
         .day-card:hover {
-            transform: translateY(-5px) scale(1.02); /* Efecto hover más pronunciado */
-            box-shadow: 0 12px 25px -5px rgba(168, 85, 247, 0.2), 0 5px 10px -3px rgba(168, 85, 247, 0.15);
-            border-color: #c084fc; /* Resaltar borde en hover */
+            transform: scale(0.99) rotate(0.1deg); /* Encoger ligeramente en hover */
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.4);
+            filter: grayscale(75%);
+            border-color: #6b7280;
+            border-style: dotted; /* Cambiar a puntos en hover */
         }
 
-        /* Estilo tarjeta final */
+
+        /* Tarjeta final - Desolación */
         .final-day-card {
-            background: linear-gradient(135deg, #c084fc, #a855f7);
-            color: white;
-            border: none;
-            /* transform: scale(1.03); Ya no es necesario con la animación */
-            animation: fadeIn 0.5s ease-out 0.5s forwards, finalGlow 2.5s ease-in-out infinite 1s; /* Fade in y luego glow */
+            background: #111827;
+            color: #4b5563; /* Texto muy apagado */
+            border: 1px solid #374151;
+            filter: grayscale(90%);
+            opacity: 0.5; /* Muy transparente */
+            animation: fadeIn 0.5s ease-out 0.5s forwards, crackle 2.5s ease-in-out infinite 1s;
         }
          .final-day-card .card-day,
          .final-day-card .card-title,
          .final-day-card .card-subtitle {
-             color: white;
+            color: #4b5563;
          }
          .final-day-card .custom-checkbox {
-             border-color: rgba(255, 255, 255, 0.7);
+             border-color: #374151;
+             cursor: not-allowed;
+             background-color: #1f2937;
          }
-         .final-day-card .custom-checkbox:checked {
-             background-color: rgba(255, 255, 255, 0.3);
-             border-color: white;
-         }
-         .final-day-card .custom-checkbox:checked::before {
-             color: white;
+         .final-day-card .custom-checkbox::before {
+             content: '\f12d'; /* Icono de fragmento/roto (times-circle podría ser otra opción) */
+             color: #4b5563;
          }
 
-        /* Icono cabecera */
+
+        /* Icono cabecera - Corazón roto */
         .header-icon-placeholder {
-             width: 100%; height: 100px; display: flex; align-items: center; justify-content: center;
-             text-align: center; background-color: #f3e8ff; color: #a855f7;
-             border-radius: 0.5rem; margin-bottom: 1.5rem;
+            width: 100%; height: 90px; display: flex; align-items: center; justify-content: center;
+            text-align: center; background-color: #111827; color: #6b7280;
+            border-radius: 0.25rem; margin-bottom: 1.5rem;
+            border: 1px dotted #4b5563; /* Borde punteado */
+             transform: skewX(-5deg); /* Inclinar el contenedor del icono */
         }
-        /* Animación pulso para el icono */
-        .header-icon-placeholder .fa-heart-pulse {
-            animation: pulse 1.5s ease-in-out infinite;
+        .header-icon-placeholder .fa-heart-crack {
+             animation: crackle 1.5s ease-in-out infinite alternate;
+             filter: drop-shadow(0 0 2px rgba(0,0,0,0.5));
         }
 
-        /* Estilos contenido tarjeta */
-        .card-content { flex-grow: 1; padding-right: 35px; }
-        .card-day { display: block; font-size: 0.7rem; font-weight: 700; color: #9333ea; margin-bottom: 0.5rem; letter-spacing: 0.08em; text-transform: uppercase; }
-        .card-title { color: #374151; font-weight: 600; font-size: 1rem; transition: color 0.3s ease; margin-bottom: 0.25rem; }
-        .card-subtitle { font-size: 0.875rem; color: #6b7280; margin-top: 0.25rem; transition: color 0.3s ease; line-height: 1.4; }
 
-        /* Estilo Checkbox Personalizado */
+        /* Contenido tarjeta - Texto apagado */
+        .card-content { flex-grow: 1; padding-right: 30px; }
+        .card-day { display: block; font-size: 0.65rem; font-weight: 700; color: #6b7280; margin-bottom: 0.4rem; letter-spacing: 0.06em; text-transform: uppercase; }
+        .card-title { color: #9ca3af; font-weight: 500; font-size: 0.9rem; margin-bottom: 0.2rem; }
+        .card-subtitle { font-size: 0.8rem; color: #6b7280; margin-top: 0.2rem; line-height: 1.3; }
+
+
+        /* Checkbox -> Icono X o prohibido */
         .custom-checkbox {
             appearance: none;
-            width: 24px;
-            height: 24px;
-            border: 2px solid #d8b4fe;
-            border-radius: 6px;
+            width: 20px; /* Más pequeño */
+            height: 20px;
+            border: 1px solid #4b5563; /* Borde más fino */
+            border-radius: 2px; /* Casi cuadrado */
             display: inline-block;
             position: absolute;
-            top: 1.25rem;
-            right: 1.25rem;
+            top: 1rem;
+            right: 1rem;
             cursor: pointer;
-            transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease; /* Añadida transform */
+            transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+            background-color: rgba(0,0,0,0.2); /* Fondo oscuro semi-transparente */
         }
         .custom-checkbox:checked {
-            background-color: #a855f7;
-            border-color: #a855f7;
-            animation: checkPop 0.3s ease; /* Animación al marcar */
+            background-color: #4b5563;
+            border-color: #6b7280;
+            transform: scale(0.9); /* Encoger al marcar */
         }
         .custom-checkbox:checked::before {
-            content: '\f00c';
+            content: '\f00d'; /* Icono X (times) */
             font-family: 'Font Awesome 6 Free';
             font-weight: 900;
-            color: white;
-            font-size: 14px;
+            color: #1f2937;
+            font-size: 12px; /* Más pequeño */
             position: absolute;
             top: 50%;
             left: 50%;
-            transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%) rotate(5deg); /* Ligeramente rotado */
             display: block;
         }
 
-        /* Estilo para contenido tachado */
+
+        /* Estilo para contenido "cancelado" */
         .completed .card-title,
         .completed .card-subtitle {
             text-decoration: line-through;
-            text-decoration-color: #a855f7;
-            color: #a1a1aa;
-            opacity: 0.7;
+            text-decoration-color: #6b7280;
+            text-decoration-style: wavy; /* Tacha ondulada */
+            text-decoration-thickness: 1px;
+            color: #4b5563 !important;
+            opacity: 0.5;
         }
         .completed {
-             background-color: #f5f3ff;
-             border-color: #c4b5fd;
-             transform: scale(0.98); /* Encoger ligeramente al completar */
-             box-shadow: none; /* Quitar sombra al completar */
+            background-color: #111827;
+            border-color: #374151;
+            border-style: dotted; /* Borde punteado */
+            filter: grayscale(95%);
+            transform: scale(0.97) rotate(-0.5deg); /* Encoger y rotar */
+            box-shadow: none;
+            opacity: 0.4;
         }
-        .completed:hover { /* Ajustar hover para completados */
-             transform: scale(0.99);
-             box-shadow: 0 2px 5px rgba(168, 85, 247, 0.1);
+        .completed:hover {
+            transform: scale(0.97) rotate(-0.5deg);
+            filter: grayscale(95%);
+            box-shadow: none;
+            opacity: 0.45; /* Ligeramente más visible en hover */
         }
 
 
-        /* Estilo Barra de Progreso */
+        /* Barra de Progreso - Rota */
         .progress-bar-container {
-            background-color: #e9d5ff;
-            border-radius: 9999px;
+            background-color: #1f2937;
+            border-radius: 2px;
             overflow: hidden;
-            height: 1.5rem;
+            height: 1.2rem; /* Más delgada */
             width: 100%;
             margin-bottom: 0.5rem;
-            box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+            box-shadow: inset 0 1px 2px rgba(0,0,0,0.4);
+            border: 1px solid #374151;
+            transform: skewX(-10deg); /* Inclinar la barra */
         }
         .progress-bar {
-            background: linear-gradient(90deg, #a855f7, #c084fc);
+            background: repeating-linear-gradient(
+                -45deg, /* Cambiar ángulo */
+                #4b5563,
+                #4b5563 5px, /* Rayas más finas */
+                #374151 5px,
+                #374151 10px
+            );
             height: 100%;
-            width: 0%;
-            border-radius: 9999px;
-            transition: width 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+            width: 100%;
+            border-radius: 0;
+            transition: none;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
-            font-size: 0.8rem;
-            font-weight: 600;
+            color: #6b7280;
+            font-size: 0.7rem; /* Texto más pequeño */
+            font-weight: 700; /* Más grueso */
+            text-shadow: 1px 1px 1px rgba(0,0,0,0.6);
+            letter-spacing: 0.1em; /* Más espaciado */
         }
-        /* Estilos inputs y botón calculadora */
-        input[type="number"].form-input {
-             width: 100%;
-             padding: 0.65rem 0.75rem;
-             border: 1px solid #d1d5db;
-             border-radius: 0.5rem;
-             transition: border-color 0.2s ease, box-shadow 0.2s ease;
-             font-size: 0.9rem;
+
+        /* Estilo para el contenedor del video */
+        .video-container {
+            position: relative;
+            overflow: hidden;
+            width: 90%; /* Más pequeño */
+            margin: 2rem auto; /* Centrado */
+            padding-top: 50.625%; /* Ajustar aspect ratio (90% de 56.25%) */
+            border: 1px dashed #4b5563; /* Borde discontinuo */
+            border-radius: 0.1rem;
+            background-color: #000;
+            transform: rotate(0.8deg) scale(0.98); /* Rotar y escalar */
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
         }
-         input[type="number"].form-input:focus {
-             outline: none;
-             border-color: #a855f7;
-             box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.2);
-         }
-         .calculate-button {
-             background-color: #8b5cf6;
-             color: white;
-             font-weight: 600;
-             padding: 0.75rem 1.5rem;
-             border-radius: 0.5rem;
-             transition: background-color 0.3s ease, transform 0.2s ease;
-             box-shadow: 0 4px 6px rgba(139, 92, 246, 0.2);
-         }
-         .calculate-button:hover {
-             background-color: #7c3aed;
-             transform: translateY(-2px);
-             box-shadow: 0 6px 10px rgba(139, 92, 246, 0.3);
-         }
-         .calculate-button:focus {
-              outline: none;
-              box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.3);
-         }
-         /* Resultado Calculadora */
-         #resultado_penalizacion {
-             min-height: 65px;
-             display: flex;
-             align-items: center;
-             justify-content: center;
-             border-radius: 0.5rem;
-             font-size: 0.95rem;
-             transition: background-color 0.3s ease, border-color 0.3s ease;
-         }
-         #resultado_penalizacion span { transition: color 0.3s ease; }
-         /* Estilos específicos para resultados */
-         .result-default { background-color: #f3e8ff; border: 1px solid #e9d5ff; color: #6b21a8; }
-         .result-success { background-color: #dcfce7; border: 1px solid #86efac; color: #166534; }
-         .result-error { background-color: #fee2e2; border: 1px solid #fca5a5; color: #991b1b; }
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            filter: grayscale(30%) contrast(90%); /* Filtro ligero al video */
+        }
 
     </style>
 </head>
@@ -248,281 +292,131 @@
 
     <div class="main-container">
 
-        <header class="p-6 md:p-10 text-center relative">
+        <header class="p-6 md:p-8 text-center relative">
             <div class="header-icon-placeholder">
-                <i class="fas fa-heart-pulse fa-3x" aria-hidden="true"></i>
-            </div>
-            <h1 class="text-3xl md:text-4xl font-bold text-purple-800 mb-2 tracking-tight">Nuestro Reto de 30 Días</h1>
-            <p class="text-lg text-purple-600">30 días, 30 citas, infinitos recuerdos.</p>
-            <hr class="mt-6 border-purple-200 w-1/4 mx-auto">
-        </header>
+                <i class="fas fa-heart-crack fa-2x" aria-hidden="true"></i> </div>
+            <h1 class="text-2xl md:text-3xl font-semibold text-gray-500 mb-1 tracking-normal">Reto Roto</h1> <p class="text-md text-gray-600">Fragmentos de lo que fue.</p>
+            <hr class="mt-4 border-gray-700 w-1/5 mx-auto border-dashed"> </header>
 
-        <section id="progreso" class="px-6 md:px-10 pt-6">
-             <h2 class="text-xl font-semibold text-purple-700 mb-4 text-center">Progreso del Reto</h2>
-             <div class="progress-bar-container">
-                 <div id="progressBar" class="progress-bar">0%</div>
+        <section class="px-4 md:px-6">
+             <h2 class="text-lg font-medium text-gray-600 mb-3 text-center italic">Un Eco...</h2>
+             <div class="video-container">
+                <iframe
+                    src="https://www.youtube.com/embed/VIDEO_ID_AQUI"
+                    title="YouTube video player"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen>
+                </iframe>
              </div>
-             <p id="progressText" class="text-center text-sm text-purple-600 mb-8">Completa las actividades para ver tu avance.</p>
         </section>
 
-        <main class="p-6 md:p-10 pt-0">
+        <section id="progreso" class="px-4 md:px-6 pt-4">
+             <h2 class="text-lg font-medium text-gray-600 mb-3 text-center">Progreso Detenido</h2>
+             <div class="progress-bar-container">
+                 <div id="progressBar" class="progress-bar">ROTO</div>
+             </div>
+             <p id="progressText" class="text-center text-xs text-gray-600 mb-6">Las piezas no encajan.</p> </section>
 
-            <section id="actividades" class="mb-12">
-                <h2 class="text-2xl font-semibold text-purple-700 mb-8 text-center">Calendario de Aventuras</h2>
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <main class="p-4 md:p-6 pt-0">
 
-                    <div class="day-card" data-day="1">
+            <section id="actividades" class="mb-8">
+                <h2 class="text-xl font-semibold text-gray-500 mb-6 text-center">Escombros del Calendario</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"> <div class="day-card" data-day="1">
                         <input type="checkbox" class="custom-checkbox" id="day-1-check">
-                        <div class="card-content"> <span class="card-day">DÍA 1</span> <p class="card-title">Noche de cine en casa</p> </div>
-                        <p class="card-subtitle">¡Palomitas, mantita y nuestra peli!</p>
+                        <div class="card-content"> <span class="card-day">DÍA 1</span> <p class="card-title">Cine cancelado</p> </div>
+                        <p class="card-subtitle">Silencio.</p>
                     </div>
                     <div class="day-card" data-day="2">
                          <input type="checkbox" class="custom-checkbox" id="day-2-check">
-                         <div class="card-content"> <span class="card-day">DÍA 2</span> <p class="card-title">Cena romántica casera</p> </div>
-                         <p class="card-subtitle">Cocinamos juntos nuestro plato estrella.</p>
+                         <div class="card-content"> <span class="card-day">DÍA 2</span> <p class="card-title">Cena fría</p> </div>
+                         <p class="card-subtitle">Olvido.</p>
                     </div>
                     <div class="day-card" data-day="3">
                         <input type="checkbox" class="custom-checkbox" id="day-3-check">
-                        <div class="card-content"> <span class="card-day">DÍA 3</span> <p class="card-title">Visita al Parque de las Leyendas</p> </div>
-                        <p class="card-subtitle">Un día entre animales y cultura local.</p>
+                        <div class="card-content"> <span class="card-day">DÍA 3</span> <p class="card-title">Parque vacío</p> </div>
+                        <p class="card-subtitle">Ausencia.</p>
                     </div>
                      <div class="day-card" data-day="4">
-                        <input type="checkbox" class="custom-checkbox" id="day-4-check">
-                        <div class="card-content"> <span class="card-day">DÍA 4</span> <p class="card-title">Noche de pintura y vino</p> </div>
-                        <p class="card-subtitle">¡Liberando al artista que llevamos dentro!</p>
-                    </div>
+                         <input type="checkbox" class="custom-checkbox" id="day-4-check">
+                         <div class="card-content"> <span class="card-day">DÍA 4</span> <p class="card-title">Pintura seca</p> </div>
+                         <p class="card-subtitle">Grietas.</p>
+                     </div>
                      <div class="day-card" data-day="5">
-                         <input type="checkbox" class="custom-checkbox" id="day-5-check">
-                         <div class="card-content"> <span class="card-day">DÍA 5</span> <p class="card-title">Visitar un museo (MALI, Larco)</p> </div>
-                        <p class="card-subtitle">Inmersión en cultura e historia.</p>
-                    </div>
+                          <input type="checkbox" class="custom-checkbox" id="day-5-check">
+                          <div class="card-content"> <span class="card-day">DÍA 5</span> <p class="card-title">Museo cerrado</p> </div>
+                         <p class="card-subtitle">Polvo.</p>
+                     </div>
                      <div class="day-card" data-day="6">
-                         <input type="checkbox" class="custom-checkbox" id="day-6-check">
-                         <div class="card-content"> <span class="card-day">DÍA 6</span> <p class="card-title">Concierto o show en vivo</p> </div>
-                        <p class="card-subtitle">¡Música o comedia para vibrar juntos!</p>
-                    </div>
+                          <input type="checkbox" class="custom-checkbox" id="day-6-check">
+                          <div class="card-content"> <span class="card-day">DÍA 6</span> <p class="card-title">Sin música</p> </div>
+                         <p class="card-subtitle">Ecos.</p>
+                     </div>
                      <div class="day-card" data-day="7">
-                         <input type="checkbox" class="custom-checkbox" id="day-7-check">
-                         <div class="card-content"> <span class="card-day">DÍA 7</span> <p class="card-title">Noche de Comida Japonesa</p> </div>
-                        <p class="card-subtitle">Sushi, ramen... ¡nuestro antojo oriental!</p>
+                        <input type="checkbox" class="custom-checkbox" id="day-7-check">
+                        <div class="card-content"> <span class="card-day">DÍA 7</span> <p class="card-title">Sushi solo</p> </div>
+                        <p class="card-subtitle">Frío.</p>
                     </div>
-                     <div class="day-card" data-day="8">
-                         <input type="checkbox" class="custom-checkbox" id="day-8-check">
-                         <div class="card-content"> <span class="card-day">DÍA 8</span> <p class="card-title">Día de Juegos Mecánicos</p> </div>
-                        <p class="card-subtitle">¡Adrenalina y risas aseguradas!</p>
-                    </div>
-                    <div class="day-card" data-day="9">
-                         <input type="checkbox" class="custom-checkbox" id="day-9-check">
-                         <div class="card-content"> <span class="card-day">DÍA 9</span> <p class="card-title">Picnic en El Olivar</p> </div>
-                         <p class="card-subtitle">Relax bajo los árboles centenarios.</p>
-                    </div>
-                    <div class="day-card" data-day="10">
-                         <input type="checkbox" class="custom-checkbox" id="day-10-check">
-                         <div class="card-content"> <span class="card-day">DÍA 10</span> <p class="card-title">Noche de Juegos de Mesa</p> </div>
-                         <p class="card-subtitle">¡Competencia amistosa y estrategia!</p>
-                    </div>
-                    <div class="day-card" data-day="11">
-                         <input type="checkbox" class="custom-checkbox" id="day-11-check">
-                         <div class="card-content"> <span class="card-day">DÍA 11</span> <p class="card-title">Descubrir una cafetería</p> </div>
-                         <p class="card-subtitle">Encontrar un nuevo rincón acogedor.</p>
-                    </div>
-                    <div class="day-card" data-day="12">
-                         <input type="checkbox" class="custom-checkbox" id="day-12-check">
-                         <div class="card-content"> <span class="card-day">DÍA 12</span> <p class="card-title">Atardecer en la playa</p> </div>
-                         <p class="card-subtitle">Magia en la Costa Verde.</p>
-                    </div>
-                    <div class="day-card" data-day="13">
-                         <input type="checkbox" class="custom-checkbox" id="day-13-check">
-                         <div class="card-content"> <span class="card-day">DÍA 13</span> <p class="card-title">Pijamada temática</p> </div>
-                         <p class="card-subtitle">Maratón de pelis y charlas nocturnas.</p>
-                    </div>
-                     <div class="day-card" data-day="14">
-                         <input type="checkbox" class="custom-checkbox" id="day-14-check">
-                         <div class="card-content"> <span class="card-day">DÍA 14</span> <p class="card-title">Clase de Cocina Peruana</p> </div>
-                         <p class="card-subtitle">¡Manos a la obra y a saborear!</p>
-                    </div>
-                     <div class="day-card" data-day="15">
-                         <input type="checkbox" class="custom-checkbox" id="day-15-check">
-                         <div class="card-content"> <span class="card-day">DÍA 15</span> <p class="card-title">Paseo por Barranco</p> </div>
-                         <p class="card-subtitle">Puente de los Suspiros y arte bohemio.</p>
-                    </div>
-                     <div class="day-card" data-day="16">
-                         <input type="checkbox" class="custom-checkbox" id="day-16-check">
-                         <div class="card-content"> <span class="card-day">DÍA 16</span> <p class="card-title">Noche de Escape Room</p> </div>
-                         <p class="card-subtitle">¡Resolver misterios contra reloj!</p>
-                    </div>
-                    <div class="day-card" data-day="17">
-                         <input type="checkbox" class="custom-checkbox" id="day-17-check">
-                         <div class="card-content"> <span class="card-day">DÍA 17</span> <p class="card-title">Noche de Karaoke</p> </div>
-                         <p class="card-subtitle">¡Afinar (o no) la voz y divertirse!</p>
-                    </div>
-                    <div class="day-card" data-day="18">
-                        <input type="checkbox" class="custom-checkbox" id="day-18-check">
-                        <div class="card-content"> <span class="card-day">DÍA 18</span> <p class="card-title">Circuito Mágico del Agua</p> </div>
-                        <p class="card-subtitle">Espectáculo de luces y fuentes.</p>
-                    </div>
-                    <div class="day-card" data-day="19">
-                        <input type="checkbox" class="custom-checkbox" id="day-19-check">
-                        <div class="card-content"> <span class="card-day">DÍA 19</span> <p class="card-title">Tarde de Bici por el Malecón</p> </div>
-                        <p class="card-subtitle">Ejercicio con vista al mar.</p>
-                    </div>
-                    <div class="day-card" data-day="20">
-                        <input type="checkbox" class="custom-checkbox" id="day-20-check">
-                        <div class="card-content"> <span class="card-day">DÍA 20</span> <p class="card-title">Noche de Estrellas</p> </div>
-                        <p class="card-subtitle">Visita al Planetario o cielo abierto.</p>
-                    </div>
-                    <div class="day-card" data-day="21">
-                        <input type="checkbox" class="custom-checkbox" id="day-21-check">
-                        <div class="card-content"> <span class="card-day">DÍA 21</span> <p class="card-title">Cata de Pisco o Vino</p> </div>
-                        <p class="card-subtitle">Descubriendo nuevos aromas y sabores.</p>
-                    </div>
-                    <div class="day-card" data-day="22">
-                        <input type="checkbox" class="custom-checkbox" id="day-22-check">
-                        <div class="card-content"> <span class="card-day">DÍA 22</span> <p class="card-title">Día de Spa en Casa</p> </div>
-                        <p class="card-subtitle">Mascarillas, masajes y relax total.</p>
-                    </div>
-                    <div class="day-card" data-day="23">
-                        <input type="checkbox" class="custom-checkbox" id="day-23-check">
-                        <div class="card-content"> <span class="card-day">DÍA 23</span> <p class="card-title">Explorar un Mercado Local</p> </div>
-                        <p class="card-subtitle">Colores y sabores de Surquillo.</p>
-                    </div>
-                    <div class="day-card" data-day="24">
-                        <input type="checkbox" class="custom-checkbox" id="day-24-check">
-                        <div class="card-content"> <span class="card-day">DÍA 24</span> <p class="card-title">Clase de Baile Juntos</p> </div>
-                        <p class="card-subtitle">Salsa, bachata... ¡a mover el cuerpo!</p>
-                    </div>
-                     <div class="day-card" data-day="25">
-                        <input type="checkbox" class="custom-checkbox" id="day-25-check">
-                        <div class="card-content"> <span class="card-day">DÍA 25</span> <p class="card-title">Visitar las Catacumbas</p> </div>
-                        <p class="card-subtitle">Un toque de misterio bajo Lima.</p>
-                    </div>
-                    <div class="day-card" data-day="26">
-                        <input type="checkbox" class="custom-checkbox" id="day-26-check">
-                        <div class="card-content"> <span class="card-day">DÍA 26</span> <p class="card-title">Taller de Cerámica o Artesanía</p> </div>
-                        <p class="card-subtitle">Creando recuerdos con las manos.</p>
-                    </div>
-                    <div class="day-card" data-day="27">
-                        <input type="checkbox" class="custom-checkbox" id="day-27-check">
-                        <div class="card-content"> <span class="card-day">DÍA 27</span> <p class="card-title">Noche de Teatro o Stand-up</p> </div>
-                        <p class="card-subtitle">Cultura, risas o drama en vivo.</p>
-                    </div>
-                    <div class="day-card" data-day="28">
-                        <input type="checkbox" class="custom-checkbox" id="day-28-check">
-                        <div class="card-content"> <span class="card-day">DÍA 28</span> <p class="card-title">Preparar Postres Juntos</p> </div>
-                        <p class="card-subtitle">El dulce sabor del trabajo en equipo.</p>
+                    <div class="day-card" data-day="8">
+                        <input type="checkbox" class="custom-checkbox" id="day-8-check">
+                        <div class="card-content"> <span class="card-day">DÍA 8</span> <p class="card-title">Juegos rotos</p> </div>
+                        <p class="card-subtitle">Inmóvil.</p>
                     </div>
                     <div class="day-card" data-day="29">
                         <input type="checkbox" class="custom-checkbox" id="day-29-check">
-                        <div class="card-content"> <span class="card-day">DÍA 29</span> <p class="card-title">Recrear nuestra Primera Cita</p> </div>
-                        <p class="card-subtitle">Un viaje nostálgico y romántico.</p>
+                        <div class="card-content"> <span class="card-day">DÍA 29</span> <p class="card-title">Recuerdo borroso</p> </div>
+                        <p class="card-subtitle">Ayer.</p>
                     </div>
 
                     <div class="day-card final-day-card" data-day="30">
-                        <input type="checkbox" class="custom-checkbox" id="day-30-check">
-                        <div class="card-content">
-                            <span class="card-day">DÍA 30 - GRAN FINAL</span>
-                            <p class="card-title">Cena de Celebración</p>
+                        <input type="checkbox" class="custom-checkbox" id="day-30-check" disabled> <div class="card-content">
+                            <span class="card-day">DÍA 30</span>
+                            <p class="card-title">Final</p>
                         </div>
-                        <p class="card-subtitle">¡Lo logramos! Brindis especial.</p>
+                        <p class="card-subtitle">Nada.</p>
                     </div>
                 </div>
             </section>
 
-            <section id="penalizacion" class="bg-purple-50 p-6 md:p-8 rounded-lg border border-purple-200 mt-12">
-                 <h2 class="text-2xl font-semibold text-purple-700 mb-6 text-center">Las Reglas del Cariño</h2>
-                  <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200 max-w-lg mx-auto">
-                      <h3 class="text-lg font-semibold text-purple-800 mb-5 text-center">Calculadora de Penalización</h3>
-                      <div class="space-y-4 mb-6">
-                          <div>
-                              <label for="monto_x" class="block text-sm font-medium text-gray-700 mb-1">Monto base por día (S/):</label>
-                              <input type="number" id="monto_x" name="monto_x" placeholder="Ej: 50" class="form-input">
-                          </div>
-                          <div>
-                              <label for="porcentaje_y" class="block text-sm font-medium text-gray-700 mb-1">Porcentaje adicional (%):</label>
-                              <input type="number" id="porcentaje_y" name="porcentaje_y" placeholder="Ej: 10" class="form-input">
-                          </div>
-                          <div>
-                              <label for="dia_retiro" class="block text-sm font-medium text-gray-700 mb-1">Día en que se retira (1-29):</label>
-                              <input type="number" id="dia_retiro" name="dia_retiro" min="1" max="29" placeholder="Ej: 15" class="form-input">
-                          </div>
-                      </div>
-                      <div class="text-center mb-4">
-                           <button id="calculateBtnPenalty" class="calculate-button">
-                              <i class="fas fa-calculator mr-2"></i> Calcular Penalización
-                           </button>
-                      </div>
-                      <div id="resultado_penalizacion" class="mt-6 p-4 result-default">
-                           <span class="font-medium">El resultado aparecerá aquí.</span>
-                      </div>
-                       <p class="mt-4 text-xs text-gray-500 italic text-center">
-                           Fórmula: (Días Faltantes * Monto X) + (Y% de [30 * Monto X])
-                       </p>
-                  </div>
-                  <p class="mt-6 text-center text-purple-600 font-medium">
-                      ¡Pero crucemos los dedos para llegar juntos al día 30! <i class="fas fa-heart text-purple-500 animate-pulse"></i>
-                  </p>
-            </section>
+            </main>
 
-        </main>
-
-        <footer class="text-center p-6 text-sm text-purple-500 bg-purple-50 border-t border-purple-100 mt-8">
-            Hecho con <i class="fas fa-heart text-red-500"></i> para nuestra aventura de 30 días.
+        <footer class="text-center p-4 text-xs text-gray-700 bg-gray-900 border-t border-gray-800 mt-6">
+            <i class="fas fa-skull-crossbones text-gray-600"></i> Fin.
         </footer>
 
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // --- Variables y Selectores ---
-            const challengeStateKey = 'challengeProgress_v2'; // Mantener clave si no hay cambios estructurales grandes
+            // --- Variables y Selectores (sin la penalización) ---
+            const challengeStateKey = 'challengeProgress_broken_v2'; // Nueva clave
             const dayCards = document.querySelectorAll('.day-card[data-day]');
             const progressBar = document.getElementById('progressBar');
             const progressText = document.getElementById('progressText');
-            const totalActivities = dayCards.length; // Sigue siendo 30
-
-            // Selectores para la calculadora de penalización
-            const montoXInput = document.getElementById('monto_x');
-            const porcentajeYInput = document.getElementById('porcentaje_y');
-            const diaRetiroInput = document.getElementById('dia_retiro');
-            const calculateBtnPenalty = document.getElementById('calculateBtnPenalty');
-            const resultadoDivPenalty = document.getElementById('resultado_penalizacion');
+            const totalActivities = 30;
 
             // --- Funciones ---
 
-            // Carga el estado guardado desde localStorage
             function loadState() {
                 const savedState = localStorage.getItem(challengeStateKey);
                 let state = {};
                 if (savedState) {
                     try {
                         state = JSON.parse(savedState);
-                        // Asegurarse de que el estado sea un objeto
-                        if (typeof state !== 'object' || state === null) {
-                             state = {};
-                        }
-                    } catch (e) {
-                        console.error("Error parsing saved state:", e);
-                        state = {}; // Resetea si hay error
-                    }
+                        if (typeof state !== 'object' || state === null) state = {};
+                    } catch (e) { console.error("Error parsing saved state:", e); state = {}; }
                 }
                 return state;
             }
 
-            // Guarda el estado actual en localStorage
             function saveState(state) {
                  try {
-                     // Asegurarse de guardar un objeto válido
                      if (typeof state === 'object' && state !== null) {
-                        localStorage.setItem(challengeStateKey, JSON.stringify(state));
-                     } else {
-                         console.error("Attempted to save invalid state:", state);
-                     }
-                 } catch (e) {
-                     console.error("Error saving state:", e);
-                 }
-            }
+                         localStorage.setItem(challengeStateKey, JSON.stringify(state));
+                     } else { console.error("Attempted to save invalid state:", state); }
+                 } catch (e) { console.error("Error saving state:", e); }
+             }
 
-            // Actualiza la UI (checkboxes, estilos, barra de progreso)
             function updateUI(state) {
                 let completedCount = 0;
                 dayCards.forEach(card => {
@@ -530,11 +424,16 @@
                     const checkbox = card.querySelector('.custom-checkbox');
                     if (!checkbox) return;
 
-                    // Verificar si state es un objeto antes de acceder a state[day]
+                    if (card.classList.contains('final-day-card')) {
+                        checkbox.disabled = true;
+                        checkbox.checked = false;
+                        card.classList.remove('completed');
+                        return;
+                    }
+
                     const isCompleted = (typeof state === 'object' && state !== null && state[day] === true);
                     checkbox.checked = isCompleted;
 
-                    // Aplicar/Quitar clase 'completed' para estilos CSS
                     if (isCompleted) {
                         card.classList.add('completed');
                         completedCount++;
@@ -544,118 +443,60 @@
                 });
 
                 // Actualizar barra y texto de progreso
-                const percentage = totalActivities > 0 ? Math.round((completedCount / totalActivities) * 100) : 0;
                 if (progressBar) {
-                    // Forzar reflujo para reiniciar transición si el valor es el mismo (ej. 0 -> 0)
-                    progressBar.style.width = `${percentage}%`;
-                    progressBar.textContent = `${percentage}%`;
-                    void progressBar.offsetWidth; // Truco para forzar reflujo
+                    // La barra siempre muestra ROTO, pero el texto puede reflejar el conteo
+                    progressBar.textContent = `ROTO`;
                 }
                  if (progressText) {
-                     if (completedCount === 0) {
-                         progressText.textContent = "¡Empiecen la aventura marcando la primera actividad!";
-                     } else if (completedCount === totalActivities) {
-                         progressText.textContent = `¡Felicidades! Han completado el ${percentage}% del reto. ¡Lo lograron! 🎉`;
-                         // Podrías añadir aquí una clase al body o a un contenedor para activar confeti CSS
-                     } else {
-                         progressText.textContent = `Han completado ${completedCount} de ${totalActivities} actividades (${percentage}%). ¡Sigan así!`;
-                     }
+                     progressText.textContent = `${completedCount} fragmento(s) marcado(s). Las piezas no encajan.`;
                  }
             }
 
-            // Manejador de cambio en los checkboxes
             function handleCheckboxChange(event) {
                 const card = event.target.closest('.day-card');
-                if (!card) return;
+                if (!card || card.classList.contains('final-day-card')) return;
                 const day = card.getAttribute('data-day');
                 const isChecked = event.target.checked;
 
                 const currentState = loadState();
-                // Asegurarse de que currentState es un objeto
                  if (typeof currentState !== 'object' || currentState === null) {
-                      console.error("Loaded state is not an object:", currentState);
-                      // Podrías inicializarlo como objeto vacío si prefieres continuar
-                      // currentState = {};
-                      return; // O detener la ejecución si el estado es inválido
+                     console.error("Loaded state is not an object:", currentState);
+                     return;
                  }
 
                 currentState[day] = isChecked;
-
                 saveState(currentState);
-                updateUI(currentState); // Actualiza toda la UI para reflejar el cambio
+                updateUI(currentState);
             }
-
-             // Función para calcular la penalización
-            function calcularPenalizacion() {
-                const montoX = parseFloat(montoXInput.value);
-                const porcentajeY = parseFloat(porcentajeYInput.value);
-                const diaRetiro = parseInt(diaRetiroInput.value, 10);
-
-                // Limpiar estilos y contenido previo
-                resultadoDivPenalty.className = 'mt-6 p-4 flex items-center justify-center rounded-md text-center min-h-[65px] transition duration-300 ease-in-out'; // Clases base
-                resultadoDivPenalty.innerHTML = '';
-
-                let isValid = true;
-                let errorMessage = '';
-
-                if (isNaN(montoX) || montoX <= 0) {
-                    errorMessage = 'Ingresa un Monto X válido (> 0).';
-                    isValid = false;
-                } else if (isNaN(porcentajeY) || porcentajeY < 0) {
-                     errorMessage = 'Ingresa un Porcentaje Y válido (>= 0).';
-                     isValid = false;
-                } else if (isNaN(diaRetiro) || diaRetiro < 1 || diaRetiro > 29) {
-                     errorMessage = 'Ingresa un Día de Retiro válido (1-29).';
-                     isValid = false;
-                }
-
-                if (!isValid) {
-                    resultadoDivPenalty.classList.add('result-error'); // Estilo de error
-                    resultadoDivPenalty.innerHTML = `<span class="font-medium">${errorMessage}</span>`;
-                    return;
-                }
-
-                // Si es válido, calcular y mostrar
-                const diasFaltantes = 30 - diaRetiro;
-                const penalizacionBase = diasFaltantes * montoX;
-                const penalizacionPorcentual = (porcentajeY / 100) * (30 * montoX);
-                const penalizacionTotal = penalizacionBase + penalizacionPorcentual;
-
-                resultadoDivPenalty.classList.add('result-success'); // Estilo de éxito
-                resultadoDivPenalty.innerHTML = `<span class="font-bold text-lg">Penalización Total: S/ ${penalizacionTotal.toFixed(2)}</span>`;
-            }
-
 
             // --- Inicialización ---
             const initialState = loadState();
-            updateUI(initialState); // Carga el estado inicial al cargar la página
+            updateUI(initialState);
 
-            // Añadir listeners a los checkboxes
+            // Añadir listeners a los checkboxes (excluyendo el final)
             dayCards.forEach(card => {
+                if (card.classList.contains('final-day-card')) return;
                 const checkbox = card.querySelector('.custom-checkbox');
                 if (checkbox) {
                     checkbox.addEventListener('change', handleCheckboxChange);
                 }
             });
 
-            // Añadir listener al botón de calcular penalización
-            if (calculateBtnPenalty) {
-                calculateBtnPenalty.addEventListener('click', calcularPenalizacion);
-            } else {
-                console.error("El botón de cálculo de penalización no se encontró.");
-            }
-
-             // Pequeño ajuste para asegurar que las animaciones de entrada se vean bien
-             // al cargar la página si ya hay elementos marcados.
+             // Forzar opacidad final después de la animación
              setTimeout(() => {
-                dayCards.forEach(card => {
-                    // Forzar la visibilidad si la animación ya terminó (por si acaso)
-                    if (card.style.opacity === '0') {
-                         card.style.opacity = '1';
-                    }
-                });
-             }, 600); // Un poco más del tiempo de la animación más larga
-
+                 document.querySelectorAll('.day-card').forEach(card => {
+                     if (card.style.opacity === '0') {
+                         // Restaurar opacidad base según si está "completado" o no
+                         if (card.classList.contains('completed')) {
+                             card.style.opacity = '0.4';
+                         } else if (card.classList.contains('final-day-card')) {
+                             card.style.opacity = '0.5';
+                         } else {
+                             card.style.opacity = '0.7';
+                         }
+                     }
+                 });
+             }, 700); // Aumentar ligeramente el tiempo por si acaso
 
         });
     </script>
